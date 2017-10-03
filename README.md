@@ -1,5 +1,8 @@
-Python Neural Genetic Hybrids -- Release 0.3
-=================================================
+# Python Neural Genetic Algorithm Hybrids (PyNeurGen)
+
+This is a fork of the PyNeurGen based on release 0.3.1. The original site is http://pyneurgen.sourceforge.net/ with the source code at https://sourceforge.net/projects/pyneurgen/
+
+# About
 
 This package provides the Python "pyneurgen" module, which contains several
 classes for implementing grammatical evolution, a form of genetic programming,
@@ -24,14 +27,19 @@ there are instructions on making your own structures for your unique
 requirements.
 
 
-How to install this package
-===========================
+# How to install this package
 
+```shell
 python setup.py install
+```
 
+or
 
-Author and license information
-==============================
+```shell
+sudo pip install git+https://github.com/jacksonpradolima/pyneurgen.git@master
+```
+
+# Author and license information
 
 Copyright (C) 2012 Don Smiley <ds@sidorof.com>
 
