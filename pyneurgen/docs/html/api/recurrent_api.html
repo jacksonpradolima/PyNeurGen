@@ -1,0 +1,326 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Recurrent Module</h1>
+<p>This module implements various approaches to recurrence.</p>
+<p>Elman Simple Recurrent Network:</p>
+<ul>
+<li>Source nodes are hidden</li>
+<li>One level of copy nodes</li>
+<li>Source Value is activation value</li>
+<li>Source value replaces existing copy node value</li>
+<li>Copy node activation is linear</li>
+</ul>
+<p>Jordan</p>
+<ul>
+<li>Souce nodes are output nodes</li>
+<li>One level of copy nodes</li>
+<li>Source Value is activation value</li>
+<li>Existing copy node value is discounted
+and combined with new source value</li>
+</ul>
+<p>NARX  Non-Linear AutoRegressive with eXogenous inputs</p>
+<ul>
+<li>Using the Narendra and Parthasathy variation</li>
+<li>Source nodes can come from outputs, inputs
+Outputs -- multple copies or orders
+Inputs -- multple copies</li>
+<li>Order == Number of copies</li>
+<li>Copy value can be discounted</li>
+</ul>
+<h2><a name= "RecurrentConfig">RecurrentConfig Class</a></h2>
+<p>This is the base class for recurrent modifications.  It is not intended to
+be used directly.</p>
+<h3>def __init__(self):</h3>
+<p>This function initializes the configuration class.</p>
+<h3>def apply_config(self, neural_net):</h3>
+<p>This function modifies the neural net that is passed in by taking the
+parameters that have been set in this class.  By having _apply_config,
+subclassed versions of apply_config can take multiple passes with less
+code.</p>
+<h3>def _apply_config(self, neural_net):</h3>
+<p>This function actually does the work.</p>
+<h3>def _fully_connect(lower_node, upper_nodes):</h3>
+<p>This function creates connections to each of the upper nodes.</p>
+<p>This is a separate function from the one in layers, because using this
+version does not require ALL of the nodes on a layer to be used.</p>
+<h3>def get_source_nodes(self, neural_net):</h3>
+<p>This function is a stub for getting the appropriate source nodes.</p>
+<h3>def get_upper_nodes(self, neural_net):</h3>
+<p>This function is a stub for getting the appropriate nodes to which the
+copy nodes will connect.</p>
+<h2><a name= "ElmanSimpleRecurrent">ElmanSimpleRecurrent Class</a></h2>
+<p>This class implements a process for converting a standard neural network
+into an Elman Simple Recurrent Network.  The following is used to define
+such a configuration:
+Source nodes are nodes in the hidden layer.
+One level of copy nodes is used, in this situation referred to as
+context units.
+The source value from the hidden node is the activation value and the
+copy node (context) activation is linear; in other words simply a
+copy of the activation.  The source value replaces any previous
+value.</p>
+<p>In the case of multiple hidden layers, this class will take the lowest
+hidden layer.</p>
+<p>The class defaults to context nodes being fully connected to nodes in
+the hidden layer.</p>
+<h3>def __init__(self):</h3>
+<p>This function initializes the weights and default connection type
+consistent with an Elman Network.</p>
+<h3>def get_source_nodes(self, neural_net):</h3>
+<p>This function returns the hidden nodes from layer 1.</p>
+<h2><a name= "JordanRecurrent">JordanRecurrent Class</a></h2>
+<p>This class implements a process for converting a standard neural network
+into an Jordan style recurrent metwork.  The following is used to define
+such a configuration:</p>
+<ul>
+<li>Source nodes are nodes in the output layer.</li>
+<li>One level of copy nodes is used, in this situation referred to as
+context units.</li>
+<li>
+<p>The source value from the output node is the activation value and the
+copy node (context) activation is linear; in other words simply a
+copy of the activation.</p>
+</li>
+<li>
+<p>The source value is added to the slightly discounted previous copy
+value.  So, the existing weight is some value less than 1.0 and
+greater than zero.</p>
+</li>
+<li>
+<p>In the case of multiple hidden layers, this class will take the lowest
+hidden layer.</p>
+</li>
+<li>
+<p>The class defaults to context nodes being fully connected to nodes in
+the output layer.</p>
+</li>
+</ul>
+<h3>def __init__(self, existing_weight):</h3>
+<p>Initialization in this class means passing the weight that will be
+multiplied time the existing value in the copy node.</p>
+<h3>def get_source_nodes(self, neural_net):</h3>
+<p>This function returns the output nodes.</p>
+<h2><a name= "NARXRecurrent">NARXRecurrent Class</a></h2>
+<p>This class implements a process for converting a standard neural network
+into a NARX (Non-Linear AutoRegressive with eXogenous inputs) recurrent
+network.</p>
+<p>It also contains some modifications suggested by Narendra and Parthasathy
+(1990).</p>
+<p>Source nodes can come from outputs and inputs.  There can be multiple
+levels of copies (or order in this nomenclature) from either outputs or
+inputs.</p>
+<p>The source value can be weighted fully, or the incoming weight adjusted
+lower.</p>
+<p>This class applies changes to the neural network by first applying the
+configurations related to the output nodes and then to the input nodes.</p>
+<h3>def __init__(self, output_order, incoming_weight_from_output, input_order, incoming_weight_from_input):</h3>
+<p>This function takes:
+the output order, or number of copy levels of
+output values,
+the weight to apply to the incoming values from output nodes,
+the input order, or number of copy levels of input values,
+the weight to apply to the incoming values from input nodes</p>
+<h3>def get_source_nodes(self, neural_net):</h3>
+<p>This function returns either the output nodes or input nodes depending
+upon self._node_type.</p>
+<h3>def apply_config(self, neural_net):</h3>
+<p>This function first applies any parameters related to the output nodes
+and then any with the input nodes.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

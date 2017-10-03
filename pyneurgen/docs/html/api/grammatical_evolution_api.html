@@ -1,0 +1,456 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Grammatical_evolution Module</h1>
+<p>This module implements the components for grammatical evolution.</p>
+<p>Logging has been added, but is currently poorly integrated.
+Hoped for course for implementation:
+Turn on/off logging from user program
+Granularity of logging choices
+ex. be able to specify logging for certain reasons why a genotype fails
+such as timeout, or syntax errors</p>
+<p>Generally speaking, the intent will be to be able to turn on debugging
+for certain types of problems without being flooded in other areas.</p>
+<h2><a name= "GrammaticalEvolution">GrammaticalEvolution Class</a></h2>
+<p>This class comprises the overall process of generating genotypes,
+expressing the genes as programs using grammer and evalating the fitness of
+those members.</p>
+<h3>def __init__(self):</h3>
+<p>Because there are a number of parameters to specify, there are no
+specific variables that are initialized within __init__.</p>
+<p>There is a formidable number of default variables specified in this
+function however.</p>
+<h3>def set_population_size(self, size):</h3>
+<p>This function sets the total number of genotypes in the population.
+This program uses a fixed size population.</p>
+<h3>def get_population_size(self):</h3>
+<p>This function returns total number of genotypes in the
+population.</p>
+<h3>def set_genotype_length(self, start_gene_length, max_gene_length=None):</h3>
+<p>This function sets the initial size of the binary genotype.  An
+optional max_gene_length can be entered as well.  This permits the
+genotype to grow during the mapping process of the genotype to a
+program.  The lengths are the length of the decimal genotypes, which
+are therefor 8 times longer the binary genotypes created.</p>
+<h3>def get_genotype_length(self):</h3>
+<p>This function returns a tuple with the length the initial genotype and
+the maximum genotype length permitted.</p>
+<h3>def set_extend_genotype(self, true_false):</h3>
+<p>This function sets whether the genotype is extended during the gene
+mapping process.</p>
+<h3>def get_extend_genotype(self):</h3>
+<p>This function returns whether the genotype is extended during the gene
+mapping process.</p>
+<h3>def set_wrap(self, true_false):</h3>
+<p>This function sets whether the genotype is wrapped during the gene
+mapping process.  Wrapping would occur in the iterative process of
+getting the next codon is the basis for the variable selection process.
+If wrapped, when all the codons in the genotype are exhausted, the
+position marker is wrapped around to the first codon in the sequence
+and goes on.</p>
+<h3>def get_wrap(self):</h3>
+<p>This function returns whether the genotype is wrapped during the gene
+mapping process.  Wrapping would occur in the iterative process of
+getting the next codon is the basis for the variable selection process.
+If wrapped, when all the codons in the genotype are exhausted, the
+position marker is wrapped around to the first codon in the sequence
+and goes on.</p>
+<h3>def set_bnf(self, bnf):</h3>
+<p>This function parses up a bnf and builds a dictionary. The incoming
+format is designed to follow a format of:  <key> ::= value1 | value2
+\n. The following lines can also hold additional values to accommodate
+longer choices.</p>
+<p>In addition, a set of statements are marked with a key
+starting with "&lt;S".  These are treated differently in that spaces are
+not automatically stripped from the front.  This enables python
+oriented white space to be honored.</p>
+<h3>def strip_spaces(key, values):</h3>
+<p>This removes white space unless it is a statement.</p>
+<h3>def get_bnf(self):</h3>
+<p>This function returns the Backus Naur form of variables that are used
+to map the genotypes to the generated programs.</p>
+<h3>def set_maintain_history(self, true_false):</h3>
+<p>This function sets a flag to maintain a history of fitness_lists.</p>
+<h3>def get_maintain_history(self):</h3>
+<p>This function returns a flag indicating whether the fitness list is
+retained for each generation.</p>
+<h3>def set_max_program_length(self, max_program_length):</h3>
+<p>This function sets the maximum length that a program can attain before
+the genotype is declared a failure.</p>
+<h3>def get_max_program_length(self):</h3>
+<p>This function gets the maximum length that a program can attain before
+the genotype is declared a failure.</p>
+<h3>def set_fitness_fail(self, fitness_fail):</h3>
+<p>This function sets the fitness fail value that will be applied to
+fitness functions that are deemed failure.  Failure would be programs
+that fail due to overflows, or programs that grow to greater than
+maximum program length, syntax failures, or other reasons.</p>
+<h3>def get_fitness_fail(self):</h3>
+<p>This function returns the value of fitness if the program is a failure.</p>
+<h3>def set_mutation_type(self, mutation_type):</h3>
+<p>This function sets the mutation type.  The choices are s(ingle),
+m(ultiple).  If the choice is "s", then the mutation rate is applied
+as a choice of whether to alter 1 bit on a gene or not.  If the choice
+is "m", then the process applies the rate as the probability that a bit
+will be changed as it walks the gene.  In short, "s", means that if the
+gene is mutated, it will take place once.  Otherwise, the gene could be
+mutated multiple times.</p>
+<h3>def get_mutation_type(self):</h3>
+<p>This function returns the mutation type.  See set_mutation_type for a
+more complete explanation.</p>
+<h3>def set_mutation_rate(self, mutation_rate):</h3>
+<p>This function sets the mutation rate that will be applied to members
+selected into the fitness pool and to newly generated children.  Note
+that the mutation rate should be vastly different depending upon the
+mutation type that you have selected.  If the mutation type is 's',
+then the rate is the probability that the genotype will be mutated.  If
+the mutation type is 'm', then the rate is the probability that the any
+given bit in the genotype will be altered.  Because of that, the
+mutation rate should be significantly lower than the rate used with a
+mutation type of 's'.</p>
+<h3>def get_mutation_rate(self):</h3>
+<p>This function gets the mutation rate that will be applied to members
+selected into the fitness pool and to newly generated children.  Note
+that the mutation rate should be vastly different depending upon the
+mutation type that you have selected.  If the mutation type is 's',
+then the rate is the probability that the genotype will be mutated.  If
+the mutation type is 'm', then the rate is the probability that the any
+given bit in the genotype will be altered.  Because of that, the
+mutation rate should be significantly lower than the rate used with a
+mutation type of 's'.</p>
+<h3>def set_crossover_rate(self, crossover_rate):</h3>
+<p>This function sets the probablity that will be
+applied to members selected into the fitness pool.</p>
+<h3>def get_crossover_rate(self):</h3>
+<p>This function gets the probablity that will be applied to members
+selected into the fitness pool.</p>
+<h3>def set_children_per_crossover(self, children_per_crossover):</h3>
+<p>This function sets the number of children that will generated from two
+parents.  The choice is one or two.</p>
+<h3>def get_children_per_crossover(self):</h3>
+<p>This function gets the number of children that will generated from two
+parents.</p>
+<h3>def set_max_generations(self, generations):</h3>
+<p>This function sets the maximum number of generations that will be run.</p>
+<h3>def get_max_generations(self):</h3>
+<p>This function gets the maximum number of generations that will be run.</p>
+<h3>def set_fitness_type(self, fitness_type, target_value=0.0):</h3>
+<p>This function sets whether the objective is to achieve as large a
+fitness value possible, small, or hit a target_value.  Therefor the
+choices are 'max', 'min', or 'center'.  If center is used, then a
+target value should be entered as well.  For example, suppose that you
+wanted to hit a target somewhere near zero.  Setting the target_value
+at .001 would cause the process to complete if a fitness value achieved
+and absolute value of .001 or less.</p>
+<h3>def get_fitness_type(self):</h3>
+<p>This function gets whether the objective is to achieve as large a
+fitness value possible, small, or hit a target_value.  Therefor the
+choices are 'max', 'min', or 'center'.  If center is used, then a
+target value should be entered as well.  For example, suppose that you
+wanted to hit a target somewhere near zero.  Setting the target_value
+at .001 would cause the process to complete if a fitness value achieved
+.001 or less.</p>
+<h3>def set_max_fitness_rate(self, max_fitness_rate):</h3>
+<p>This function sets a maximum for the number of genotypes that can be
+put in the fitness pool.  Since some fitness selection approaches can
+have a varying number selected, and since multiple selection approaches
+can be applied consequentially, there needs to be an ultimate limit on
+the total number.  The max fitness rate must be a value greater than
+zero and less than 1.0.</p>
+<h3>def get_max_fitness_rate(self):</h3>
+<p>This function gets a maximum for the number of genotypes that can be
+in the fitness pool.  Since some fitness selection approaches can have
+a varying number selected, and since multiple selection approaches can
+be applied consequentially, there needs to be an ultimate limit on the
+total number.  The max fitness rate must be a value greater than zero
+and less than 1.0.</p>
+<h3>def set_fitness_selections(self, *params):</h3>
+<p>This function loads the fitness selections that are to be used to
+determine genotypes worthy of continuing to the next generation.  There
+can be multiple selections, such as elites and tournaments.  See the
+section Fitness Selection for further information.</p>
+<h3>def set_replacement_selections(self, *params):</h3>
+<p>This function loads the replacement selections that are used to
+determine genotypes are to be replaced.  Basically, it is the grim
+reaper. Multiple replacement types can be loaded to meet the criteria.
+The number replaced is governed by the fitness selection functions to
+ensure that the population number stays constant.</p>
+<h3>def get_fitness_history(self, statistic='best_value'):</h3>
+<p>This funcion returns a list of values that represent historical values
+from the fitness history.  While there is a default value of
+'best_value', other values are 'mean', 'min_value', 'max_value',
+'worst_value', 'min_member', 'max_member', 'best_member', and
+'worst_member'. The order is from oldest to newest.</p>
+<h3>def get_best_member(self):</h3>
+<p>This function returns the member that it is most fit according to the
+fitness list.  Accordingly, it is only functional after at least one
+generation has been completed.</p>
+<h3>def get_worst_member(self):</h3>
+<p>This function returns the member that it is least fit according to the
+fitness list.  Accordingly, it is only functional after at least one
+generation has been completed.</p>
+<h3>def set_timeouts(self, preprogram, program):</h3>
+<p>This function sets the number of seconds that the program waits until
+declaring that the process is a runaway and cuts it off.  During the
+mapping process against the preprogram, due to random chance a function
+can be calling another function, which calls another, until the process
+becomes so convoluted that the resulting program will be completely
+useless. While the total length of a program can be guide to its
+uselessnes as well, this is another way to handle it. Since variables
+can also be generated during the running of the program there is a
+second variable for the running program. Clearly, the second value must
+be in harmony with the nature of the program that you are actually
+running. Otherwise, you will be cutting of your program prematurely.
+Note that the second timeout is checked only if the running program
+requests an additional variable.  Otherwise, it will not be triggered.</p>
+<h3>def get_timeouts(self):</h3>
+<p>This function returns the number of seconds that must elapse before
+the mapping process cuts off the process and declares that the genotype
+is a failure.  It returns a tuple for the number of seconds for the
+preprogram and the program itself.</p>
+<h3>def _compute_fitness(self):</h3>
+<p>This function runs the process of computing fitness functions for each
+genotype and calculating the fitness function.</p>
+<h3>def run(self, starting_generation=0):</h3>
+<p>Once the parameters have all been set governing the course of the
+evolutionary processing, this function starts the process running.  It
+will continue until it the completion criteria have been set.</p>
+<h3>def create_genotypes(self):</h3>
+<p>This function creates a genotype using the input parameters for each
+member of the population, and transfers operating parameters to the
+genotype for running the fitness functions.</p>
+<h3>def _perform_endcycle(self):</h3>
+<p>This function runs after each member of the population has computed
+their fitness function.  Then, the fitness selection objects will
+evaluate those members according to their respective criteria and
+develop a pool of members that will potentially survive to the next
+generation. Crossovers will take place from that pool and each member
+will be subject to the possibility of mutatuting.  Finally, a
+replacement process will find which members should be replaced. The
+fitness pool will then replace those members.</p>
+<h3>def _evaluate_fitness(self):</h3>
+<p>This function evaluates the fitness of the members in the light of the
+fitness criteria functions.  It returns a list of members that will be
+used for crossovers and mutations.</p>
+<h3>def _perform_crossovers(self, flist):</h3>
+<p>This function accepts a list of genotypes that are to be crossed.  The
+list is processed two at a time, and a child list holding the offspring
+is returned.  The _children_per_crossover indicator governs whether two
+children are produced or one.</p>
+<h3>def _crossover(self, parent1, parent2):</h3>
+<p>This function accepts two parents, randomly selects which is parent1
+and which is parent2.  Then, executes the crossover, and returns two
+children.</p>
+<h3>def _crossover_function(child1_binary, child2_binary, crosspoint):</h3>
+<p>This function performs the actual crossover of material at a random
+point.</p>
+<p>I gratefully acknowlege Franco from Argentina (blamaeda@gmail.com) for
+the fix to my previous version of this code.</p>
+<h3>def _perform_mutations(self, mlist):</h3>
+<p>This functions accepts a list of genotypes that are subject to
+mutation.  Each genotype is then put at risk for mutation and may or
+may not be mutated.</p>
+<h3>def _perform_replacements(self, fitness_pool):</h3>
+<p>This function accepts a list of members that will replace lesser
+performers.  The replacement process then applies the fitness pool to
+the population.</p>
+<h3>def _continue_processing(self):</h3>
+<p>This function, using the criteria for ending the evolutionary process
+after each generation, returns a flag of whether to continue or not.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

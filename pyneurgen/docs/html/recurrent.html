@@ -1,0 +1,367 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_nn.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./recurrent.html">Network Taxonomy</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Neural Network Taxonomy:</h2>
+<p><img src="./static/images/std_neural_net2.png" style="float:
+     right;" alt="Chart showing a standard neural network" />
+This section shows some examples of neural network structures and the
+code associated with the structure.  First, a couple examples
+of traditional neural networks will be shown.  This form of network is useful
+for mapping inputs to outputs, where there is no time-dependent component.  In
+other words, the knowledge of past events is not predictive of future events.
+The next section shows various forms of recurrent networks, which attempt to
+retain a memory of past events as a guide to future behavior.</p>
+<h3>Traditional Neural Networks</h3>
+<h4>Multilayer Perceptron with One Hidden Layer</h4>
+<p>This standard form of neural network has one hidden layer between the inputs
+and the outputs.  In the following code in all of these examples, the initial
+imports of the modules are assumed.</p>
+<div class="codehilite"><pre><span class="c">#   Standard MLP with one hidden layer</span>
+<span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span><span class="n">input_nodes</span><span class="p">,</span> <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span> <span class="n">output_nodes</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Note that the number of hidden nodes is in a list, even if there is only one
+hidden layer.</p>
+<h4>Multilayer Perceptron with Two Hidden Layers</h4>
+<p><img src="./static/images/std_nn_2_hidden_layers2.png" style="float:
+     right;" alt="Chart showing a standard neural network with two hidden
+layers" />
+The next form is the same as the first, with the exception that there are two
+layers.</p>
+<div class="codehilite"><pre><span class="c">#   Standard MLP with two hidden layers</span>
+<span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes1</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes2</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span>
+    <span class="n">input_nodes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">hidden_nodes1</span><span class="p">,</span>
+    <span class="n">hidden_nodes2</span><span class="p">],</span>
+    <span class="n">output_nodes</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>Recurrent Networks</h3>
+<p>The following network types are forms of recurrent networks.  Recurrent
+networks use a structure that retains previous values in an attempt to model a
+memory of past events.  While normally a network feeds forward values from lower
+layers to upper layers, a recurrent network also has returning links to
+additional copy or context units on the same or lower layers.</p>
+<p>The execution sequence of the network becomes:</p>
+<p><ul>
+   <li>feed-forward</li>
+   <li>back propagation, if in learning mode</li>
+   <li>feed back values from some nodes to copies</li>
+   <li>acquire the next set of inputs</li>
+   <li>repeat</li>
+ </ul></p>
+<p>The copies at time <strong>t</strong> always have the values of the source
+nodes at <strong>t-1</strong>. There is also no reason why copies cannot be made
+of copies, so that some copies can contain <strong>t-2</strong>,
+<strong>t-3</strong>, and so on.</p>
+<p>There are various network forms; some will retain copies of previous input
+nodes, hidden nodes, or output nodes.  There are such factors as whether the
+source value replaces, or adds to a copy value, or some combination of both.
+These additional nodes have been given various names, such as context and state
+as a way of describing their role. In this description and in the software
+classes, the nodes are referred to as copy nodes to reflect the functional
+roles.</p>
+<p>One thing to note regarding any recurrent network form:  When using the learn
+function, the <strong>random_testing</strong> variable should always be set to
+False.  If set to True, any value from using recurrent forms would be lost,
+since the sequence would be non-patterned.</p>
+<p>In the charts to follow, the feed-forward connections are shown on the
+charts, the connections linking back to the copy nodes do not.  By each copy
+node, however, the source of the values is shown.</p>
+<h4>Elman Simple Recurrent Network</h4>
+<p><img src="./static/images/elman_srn2.png" style="float:
+     right;" alt="Chart showing a Elman Simple Recurrent Network" />
+The Elman Simple Recurrent Network approach to retaining a memory of previous
+events is to copy the activations of nodes on the hidden layer.  In this form a
+downward link is made between the hidden layer and additional copy or context
+units (in this nomenclature) on the input layer.  After feeding forward the
+values from input to output a copy of the activations of the hidden layer
+replaces the value in the copy or context nodes.  So, the context nodes at time
+<strong>t</strong> have the values of the hidden nodes from at <strong>t -
+1</strong>. Finally, the activation type of the copy nodes are always
+'linear'.</p>
+<div class="codehilite"><pre><span class="c">#   Elman Simple Recurrent Network</span>
+<span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span>
+    <span class="n">input_nodes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span>
+    <span class="n">output_nodes</span><span class="p">,</span>
+    <span class="n">ElmanSimpleRecurrent</span><span class="p">())</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<h4>Jordan Style Recurrent Network</h4>
+<p><img src="./static/images/jordan_nn2.png" style="float:
+     right;" alt="Chart showing a Jordan Style Recurrent Network" />
+A Jordan style recurrent network differs from an Elman style in a couple
+ways. First, the links are made from the output layer, not the hidden layer.
+Second, the manner in which the copies are made is different.  When the Elman
+SRN copies a value from a hidden node, the value in the copy node is replaced,
+the Jordan recurrent network adds uses a factor to reduce the current value in
+the copy node and then adds the new copy value to the value in the copy
+node.</p>
+<p>New copy value = Output Activation value + Existing Copy Value * Weight
+Factor</p>
+<p>The following code shows an example of initializing this style of
+network.</p>
+<div class="codehilite"><pre><span class="c">#   Jordan style recurrent network</span>
+<span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">existing_weight_factor</span> <span class="o">=</span> <span class="o">.</span><span class="mi">7</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span>
+    <span class="n">input_nodes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span>
+    <span class="n">output_nodes</span><span class="p">,</span>
+    <span class="n">JordanRecurrent</span><span class="p">(</span><span class="n">existing_weight_factor</span><span class="p">))</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Note that the existing weight in the copy node in this case is reduced to
+70%. Then the new copy value is added to it.  In this style network, the copy
+node has a linear activation.</p>
+<div class="codehilite"><pre><span class="n">New</span> <span class="n">Copy</span> <span class="n">value</span> <span class="o">=</span> <span class="n">Output</span> <span class="n">Activation</span> <span class="n">value</span> <span class="o">+</span> <span class="n">Existing</span> <span class="n">Copy</span> <span class="n">Value</span> <span class="o">*</span> <span class="n">Existing</span> <span class="n">Weight</span> <span class="n">Factor</span>
+</pre></div>
+
+
+<h4>NARX (Non-Linear AutoRegressive with eXogenous inputs) recurrent network</h4>
+<p><img src="./static/images/NARX2.png" style="float:
+     right;" alt="Chart showing the Narx network form" /></p>
+<p>Another approach to recurrence is NARX (Non-Linear AutoRegressive with
+eXogenous inputs) recurrent network.  This form with the mellifluous name can
+take copies from the output and input layers.  Multiple levels of copies can be
+maintained, such as times <strong>t-1</strong>, <strong>t-2</strong>,
+<strong>t-3</strong>, and so on.  In this network's nomenclature, the number of
+copies are referred to as the 'order'.</p>
+<p>The transfer of the copy value in this case replaces the previous value.  In
+addition, a weighting factor is applied to a transfer so that a copy value is
+attenuated at each level.</p>
+<div class="codehilite"><pre><span class="n">New</span> <span class="n">Copy</span> <span class="n">value</span> <span class="o">=</span> <span class="n">Output</span> <span class="n">Activation</span> <span class="n">value</span> <span class="o">*</span> <span class="n">Incoming</span> <span class="n">Weight</span> <span class="n">Factor</span> <span class="o">+</span> <span class="n">Existing</span>
+<span class="n">Copy</span> <span class="n">Value</span> <span class="o">*</span> <span class="n">Existing</span> <span class="n">Weight</span> <span class="n">Factor</span>
+</pre></div>
+
+
+<p>The chart shown to the right illustrates the additional copy nodes.  Note the
+multiple copies for both the output and the inputs.</p>
+<div class="codehilite"><pre><span class="c">#   NARXRecurrent</span>
+<span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">output_order</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">incoming_weight_from_output</span> <span class="o">=</span> <span class="o">.</span><span class="mi">6</span>
+<span class="n">input_order</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">incoming_weight_from_input</span> <span class="o">=</span> <span class="o">.</span><span class="mi">4</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span><span class="n">input_nodes</span><span class="p">,</span> <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span> <span class="n">output_nodes</span><span class="p">,</span>
+        <span class="n">NARXRecurrent</span><span class="p">(</span>
+            <span class="n">output_order</span><span class="p">,</span>
+            <span class="n">incoming_weight_from_output</span><span class="p">,</span>
+            <span class="n">input_order</span><span class="p">,</span>
+            <span class="n">incoming_weight_from_input</span><span class="p">))</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<h4>Other Examples</h4>
+<p>This is an example of how to use the RecurrentConfig class to create a specific
+structure.  The use of this class is a convenience, greater control and
+greater specificity will be achieved by modifying the network directly.
+However, the capabilities of the class might be sufficient for many needs.</p>
+<p>Suppose you needed a network that had the combined capabilities of both Elman
+and Jordan style networks.  One option would be to use the following:</p>
+<div class="codehilite"><pre><span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">existing_weight_factor</span> <span class="o">=</span> <span class="o">.</span><span class="mi">7</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span>
+    <span class="n">input_nodes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span>
+    <span class="n">output_nodes</span><span class="p">,</span>
+    <span class="n">ElmanSimpleRecurrent</span><span class="p">(),</span>
+    <span class="n">JordanRecurrent</span><span class="p">(</span><span class="n">existing_weight_factor</span><span class="p">))</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Adding multiple RecurrentConfig classes to the network is an accretive process.
+Each one adds copy nodes to the network.  In this case, there would be one copy
+node that would receive source values from the output node, and two copy nodes
+that would receive values from the hidden nodes.  In this example, the updates
+to those copy nodes would be handled in the manner of the respective class.  If
+you need a different strategy, you can build your own.</p>
+<h4>Build Your Own RecurrentConfig class</h4>
+<p>Another approach would be to subclass RecurrentConfig into whatever
+configuration you needed.  For example, suppose you wanted to use a
+history of one of your input values, but no others.  For purposes of this
+example:</p>
+<ul>
+<li>the first input is maintained in a history</li>
+<li>
+<p>every copied value included 70% of the copied value and
+    30% of the existing copied value</p>
+</li>
+<li>
+<p>specify an arbitrary level of copies</p>
+</li>
+<li>linear activation</li>
+<li>copy nodes placed on the input layer</li>
+<li>connects to the hidden layer</li>
+<li>fully connected to the hidden layer</li>
+</ul>
+<p>Most of the defaults for the class are kept the same.  Only a few variables
+need to be changed.  Below you can see how those changes are made.  All the
+defaults are shown here for completeness, but when making a new class, of
+course, you only need to include the variables that are different from the base
+class.</p>
+<p>In this case we have changed the <strong>incoming_weight</strong> and
+<strong>existing_weight</strong> variables, and added
+<strong>copy_levels</strong> as an input.  The only other thing that is needed
+is to provide a mechanism for the selection of the right input.</p>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">MyNewRecurrentClass</span><span class="p">(</span><span class="n">RecurrentConfig</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy_levels</span><span class="p">):</span>
+        <span class="n">RecurrentConfig</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source_type</span> <span class="o">=</span> <span class="s">&#39;a&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation_type</span> <span class="o">=</span> <span class="s">&#39;linear&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incoming_weight</span> <span class="o">=</span> <span class="mf">0.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">existing_weight</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_type</span> <span class="o">=</span> <span class="s">&#39;m&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy_levels</span> <span class="o">=</span> <span class="n">copy_levels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy_nodes_layer</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_nodes_layer</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_source_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neural_net</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function selects the first input node.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">neural_net</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">(</span><span class="s">&#39;inputs&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>By defining the get_source_nodes function, you specify what source nodes
+are used.  In this case, we are getting the nodes from the input layer, layer
+0.  From the layer, only nodes that are of type 'input' are selected.  This
+enables screening out bias nodes and other copy nodes.  Finally, it selects only
+the first node of the input nodes.</p>
+<p>Now, we can put this class into play in a similiar fashion to the other
+examples:</p>
+<div class="codehilite"><pre><span class="n">input_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">output_nodes</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">existing_weight_factor</span> <span class="o">=</span> <span class="o">.</span><span class="mi">7</span>
+<span class="n">copy_levels</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span>
+    <span class="n">input_nodes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span>
+    <span class="n">output_nodes</span><span class="p">,</span>
+    <span class="n">MyNewRecurrentClass</span><span class="p">(</span><span class="n">copy_levels</span><span class="p">))</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

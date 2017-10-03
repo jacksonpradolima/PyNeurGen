@@ -1,0 +1,196 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Neural Genetic Hybrids</h2>
+<p>This software provides libraries for use in Python programs to build hybrids
+of neural networks and genetic algorithms and/or genetic programming.
+While both techniques are useful in their own rights, combining the two enables
+greater flexibility to solve difficult problems.  This version uses
+Grammatical Evolution for the genetic algorithm/programming portion.</p>
+<p>To ensure a reasonable learning curve, there are a number of default values
+and design choices that enable an initial usage without knowing all of the
+details.  As more experience is gained, many settings can be altered to better
+match the characteristics of the problem that you are trying to solve.</p>
+<p>While neural networks can handle many circumstances, a number of search
+spaces are beyond reach of the backpropagation technique used in most neural
+networks. This is chiefly due to being trapped in local minima.  Genetic
+algorithms are introduced into the mix, because more spaces can be effectively
+searched.  By using genetic algorithms as a wrap around process to neural
+networks, the fitness selection function is the ultimate arbiter of a desirable
+solution. Multi-objective problems become more tractable as well.</p>
+<p>The process cycle for a hybrid is:</p>
+<ul>
+<li>Create a grammatical evolutionary framework.</li>
+<li>Specify a BNF that could result in a neural network that could solve
+    your problem</li>
+<li>Determine what fitness selection criteria to include.</li>
+<li>Determine on what basis replacements will take place.</li>
+<li>Determine an end game criteria, whether fitness value, number of
+    generations or both.</li>
+<li>Run</li>
+</ul>
+<hr />
+
+<h2>Genetic Algorithms</h2>
+<p>Genetic algorithms are derived from biological themes associated with DNA.  A
+series of genotypes are generated, which are random strings of ones and zeros.
+The group of them constitute a population.  To get from random strings to
+solving a problem, there needs to be a mechanism, similar to transcription,
+which maps the unique combination of ones and zeros to a process which solves
+the problem.  This is called a fitness function.</p>
+<p>The fitness function takes the ones and zeros, and implements a solution.  By
+calculating a fitness function for each genotype, the quality of the solution
+that a genotype encodes is determined.  Some solutions are going to be
+better than others.  The fitness selection process selects some of the best
+genotypes and combines features from pairs of those, some are mutated slightly
+by changing a 1 to 0 or vice versa, and the worst are replaced.  This cycle is
+referred to as a generation.  This cycle is then repeated.  Over time, the
+solutions that are closer to solving the problem become more common. Eventually,
+the problem is sufficiently solved and the process completes. The particular
+flavor of genetic algorithms/programming used is a technique called
+<strong>grammatical evolution</strong>.</p>
+<p>Grammatical evolution uses a grammar in a Backus-Naur form, which defines
+variables and statements, using the genotype as selector of the form.  The met
+hod is particularly useful because it can produce syntactically correct
+programs, and enables a great deal of control over output from modest changes to
+fixed sets of statements to a wildly unconstrained profusion of code.</p>
+<h3>Implementation</h3>
+<p>This implementation of grammatical evolution in Python:</p>
+<ul>
+<li>Supports wrapping of the genotype while mapping</li>
+<li>Can extend the genotype length while wrapping, allowing more
+nuanced crossovers and mutations</li>
+<li>Supports runtime mapping of variables.  The program is not simply
+predefined and run, but can continue to pull random but reproducible variables
+and functions during runtime.</li>
+<li>There are a number of fitness selection options, such as Elite,
+Tournaments, Fitness Proportionate, and Linear Ranking.</li>
+<li>Mutations can be applied once per genotype, or apply a low mutation
+probability per genotype bit.</li>
+<li>Crossovers have a choice of one or two children.</li>
+</ul>
+<p><a href="tutorial_ge.html">Grammatical Evolution Tutorial</a></p>
+<hr />
+
+<h2>Neural Networks</h2>
+<p>Neural networks can be used to solve a variety of problems that are
+difficult to solve in other fashions.  The approach uses supervised learning.
+ The basic motif is to gather a set of inputs and a set of target outputs and
+the network builds a bridge between the two.  Such networks are chiefly used to
+solve non-linear problems.</p>
+<p>Neural networks are roughly based on biological metaphors for nerves.  The
+neural network accepts inputs and applies a weighting system to calculate a
+series of intermediate values stored in what are termed nodes or neurons. To
+extend the biological metaphor, the value may be sufficient to cause the neuron
+to fire or activate, resulting in an activation value from the neuron that is
+greater than the sum of the weights received by the neuron.  Because of this
+activation feature a non-linear result is possible.</p>
+<p>By comparing the outputs to the target values, an error gradient is
+created. Using a technique call back propagation, the weights of the nodes
+leading up to the output are proportionally adjusted according to the error
+curve slope. By successively cycling inputs and targets, and adjustments to the
+weights, the network weights are slowly shifted so that outputs of the network
+more closely mirror the desired target values.</p>
+<h3>Implementation</h3>
+<p>This implementation supports various kinds of network structures and neuron
+types:</p>
+<p>Network structures:</p>
+<ul>
+<li>Multiple hidden layers</li>
+<li>Sparse networks</li>
+<li>Skip layer connections</li>
+<li>Recurrent networks</li>
+</ul>
+<p>Neuron types:</p>
+<ul>
+<li>Sigmoidal, tanh, and linear activation functions</li>
+<li>Activation functions can be set by node or layer</li>
+<li>Easily subclassed custom activation functions</li>
+</ul>
+<h3>Processing:</h3>
+<ul>
+<li>Test input can be randomly processed for each epoch</li>
+</ul>
+<p><a href="tutorial_nn.html">Neural Networks Tutorial</a></p>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

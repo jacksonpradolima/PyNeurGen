@@ -1,0 +1,8 @@
+Installation
+================================================
+
+To install pyneurgen untar pyneurgen-0.1.tar.gz
+In the directory that has been created:
+
+    Run python setup.py install
+

@@ -1,0 +1,362 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Genetic Neural Hybrid Tutorial:</h2>
+<p>This tutorial presents a hybrid use of grammatical evolutionary techniques
+with a neural network. Just as in the tutorial for grammatical evolution, there
+are definitions of variables in a BNF context that the program will use to build
+a neural network.  In this example as well, there is a starting point with a
+program that is partially built.  This partially built program implements a
+machine building of the network component by component, hence more code than the
+neural network tutorial.</p>
+<p>Similarly to the neural network tutorial, this tutorial assumes that you have
+<a href="http://matplotlib.sourceforge.net">matplotlib</a> installed as well.</p>
+<h3>The Objective</h3>
+<p>Given a randomized sine wave as in the purely neural networks example, develop a
+neural network, that is able to discern the pattern.</p>
+<p><img class="rightimg" src="./static/images/nn_population.png" style="float:
+     right;" alt="Chart showing the modified sine wave" /></p>
+<p>The means to achieving the objective specified via the choices in the BNF
+are:</p>
+<ul>
+<li>Determine an appropriate number of hidden nodes.</li>
+<li>Define the activation type</li>
+<li>Define the connection weights</li>
+<li>Determine a learning rate</li>
+</ul>
+<p>In this case, the number of hidden nodes is determined by the genotype.
+Then, once defined by the genotype, the type of activation is also set
+by the genotype. Then, connections are made, or not, depending upon the
+genotype. And, connection weights are assigned by the genotype.</p>
+<p>For this example, the search used by grammatical evolution defines the
+structure and activation functions.  The weights might be adjusted via the
+learning process, or not, depending upon the value of &lt;epoch&gt;. If it is
+zero, then learning is skipped, and an evaluation is made on the basis of the
+starting weights alone.</p>
+<p>Finally, the network model is saved to disk.</p>
+<h3>Backus-Naur form</h3>
+<p>The BNF in this case contains variables related to the structure of the
+network, such the maximum number of hidden nodes, and node types.  The number of
+input and output nodes are placed in here as well, but only to generalize the
+<strong>&lt;S&gt;</strong> starting point.</p>
+<p>There is also a provision for building a filename for each network model.
+Since presumably the point of finding the best network model would be to reuse
+it, there needs to be provision for instantiating that model with all of the
+right structures and parameters. There is also a variable
+<strong>&lt;model_name&gt;</strong>. This takes the <strong>&lt;member_no&gt;</strong>, or position
+within the population and combines with a prefix and suffix, suitable for a
+filename. <strong>&lt;member_no&gt;</strong> is loaded in the local BNF for each genotype
+automatically. In the <strong>&lt;S&gt;</strong>, there is a statement saving each model to
+disk.  If you did not want to save files, you could also use the result of
+net.output_values() and project that somewhere. Here is the BNF with the
+exception of <strong>&lt;S&gt;</strong> defined:</p>
+<div class="codehilite"><pre><span class="n">bnf</span> <span class="o">=</span>   <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;model_name&gt;        ::= sample&lt;member_no&gt;.nn</span>
+<span class="s">&lt;max_hnodes&gt;        ::= 40</span>
+<span class="s">&lt;node_type&gt;         ::= sigmoid | linear | tanh</span>
+<span class="s">&lt;positive-real&gt;     ::= 0.&lt;int-const&gt;</span>
+<span class="s">&lt;int-const&gt;         ::= &lt;int-const&gt; | 1 | 2 | 3 | 4 | 5 | 6 |</span>
+<span class="s">                        7 | 8 | 9 | 0</span>
+<span class="s">&lt;sign&gt;              ::= + | -</span>
+<span class="s">&lt;max_epochs&gt;        ::= 1000</span>
+<span class="s">&lt;starting_weight&gt;   ::= &lt;sign&gt; 0.&lt;int-const&gt; | &lt;sign&gt; 1.&lt;int-const&gt; |</span>
+<span class="s">                        &lt;sign&gt; 2.&lt;int-const&gt; | &lt;sign&gt; 3.&lt;int-const&gt; |</span>
+<span class="s">                        &lt;sign&gt; 4.&lt;int-const&gt; | &lt;sign&gt; 5.&lt;int-const&gt;</span>
+<span class="s">&lt;learn_rate&gt;        ::= 0.&lt;int-const&gt;</span>
+<span class="s">&lt;saved_name&gt;        ::= None</span>
+</pre></div>
+
+
+<p>This <strong>&lt;S&gt; </strong> is much more structured than the grammatical
+evolution tutorial.  We want specific choices to be made, but need a working
+network model as an end result.  The first few lines import and instantiate the
+model, and then structure the input layer.  Then, a choice is made by the
+genotype regarding the number of hidden nodes. Those decisions are made by
+using preprocessing.  At runtime, with the structure of the network defined,
+the choices for what hidden node types, connections, and starting weights are
+made.</p>
+<p>Next, the input data and targets are defined and loaded.  In this case, the
+point of the model is to predict a probabilistically varied sine wave.</p>
+<p>Finally, the learning mode is used, to build the best weights given the
+network structure.  The mean-squared error of the test function is calculated
+and used as a fitness value, and the model is saved.</p>
+<div class="codehilite"><pre><span class="o">&lt;</span><span class="n">S</span><span class="o">&gt;</span>                 <span class="p">::</span><span class="o">=</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">from</span> <span class="nn">pyneurgen.neuralnet</span> <span class="kn">import</span> <span class="n">NeuralNet</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.nodes</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">BiasNode</span><span class="p">,</span> <span class="n">CopyNode</span><span class="p">,</span> <span class="n">Connection</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.layers</span> <span class="kn">import</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.recurrent</span> <span class="kn">import</span> <span class="n">JordanRecurrent</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">hidden_nodes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="o">&lt;</span><span class="n">positive</span><span class="o">-</span><span class="n">real</span><span class="o">&gt;</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="o">&lt;</span><span class="n">max_hnodes</span><span class="o">&gt;</span><span class="p">))),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="p">[</span><span class="n">hidden_nodes</span><span class="p">],</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_targets</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_activation_type</span><span class="p">(</span><span class="s">&#39;&lt;node_type&gt;&#39;</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">output_layer</span><span class="o">.</span><span class="n">set_activation_type</span><span class="p">(</span><span class="s">&#39;&lt;node_type&gt;&#39;</span><span class="p">)</span>
+
+<span class="c">#   Use the genotype to get starting weights</span>
+<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">layer</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">conn</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">input_connections</span><span class="p">:</span>
+            <span class="c">#   every time it is asked, another starting weight is given</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime_resolve</span><span class="p">(</span><span class="s">&#39;&lt;starting_weight&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;float&#39;</span><span class="p">))</span>
+
+<span class="c"># Note the injection of data from the genotype</span>
+<span class="c"># In a real project, the genotype might pull the data from elsewhere.</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_all_inputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_inputs</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_all_targets</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_targets</span><span class="p">)</span>
+
+<span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_inputs</span><span class="p">)</span>
+<span class="n">learn_end_point</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="o">.</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">validation_end_point</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="o">.</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">set_learn_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">learn_end_point</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">set_validation_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">learn_end_point</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_validation_range</span><span class="p">(</span><span class="n">learn_end_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">validation_end_point</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_test_range</span><span class="p">(</span><span class="n">validation_end_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">set_learnrate</span><span class="p">(</span><span class="o">&lt;</span><span class="n">learn_rate</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="o">&lt;</span><span class="n">positive</span><span class="o">-</span><span class="n">real</span><span class="o">&gt;</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="o">&lt;</span><span class="n">max_epochs</span><span class="o">&gt;</span><span class="p">)))</span>
+
+<span class="k">if</span> <span class="n">epochs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="c">#   Use learning to further set the weights</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">show_epoch_results</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">random_testing</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">#   Use validation for generating the fitness value</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">show_sample_interval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;mse&quot;</span><span class="p">,</span> <span class="n">mse</span>
+<span class="n">modelname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_resolve</span><span class="p">(</span><span class="s">&#39;&lt;model_name&gt;&#39;</span><span class="p">,</span> <span class="s">&#39;str&#39;</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">modelname</span><span class="p">)</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">set_bnf_variable</span><span class="p">(</span><span class="s">&#39;&lt;saved_name&gt;&#39;</span><span class="p">,</span> <span class="n">modelname</span><span class="p">)</span>
+
+<span class="c">#   This method can be used to look at all the particulars</span>
+<span class="c">#       of what happened...uses disk space</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">net</span>
+<span class="n">fitness</span> <span class="o">=</span> <span class="n">mse</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">set_bnf_variable</span><span class="p">(</span><span class="s">&#39;&lt;fitness&gt;&#39;</span><span class="p">,</span> <span class="n">fitness</span><span class="p">)</span>
+
+            <span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+
+
+<h3>Setting the Evolutionary Parameters</h3>
+<p>Just as in the tutorial for Grammatical
+Evolution, this example uses similar parameters for controlling the course of
+evolving.  Gene lengths are greater to reflect the need for more variables. And
+with greater size the set_max_program_length has been bumped up to 4000, since
+the overall program is larger.  Also, the timeouts are longer as well, since
+running the program will take longer.</p>
+<div class="codehilite"><pre><span class="n">ges</span> <span class="o">=</span> <span class="n">GrammaticalEvolution</span><span class="p">()</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_bnf</span><span class="p">(</span><span class="n">bnf</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_genotype_length</span><span class="p">(</span><span class="n">start_gene_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                        <span class="n">max_gene_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_population_size</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_generations</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_type</span><span class="p">(</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_program_length</span><span class="p">(</span><span class="mi">4000</span><span class="p">)</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_wrap</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_fail</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_mutation_type</span><span class="p">(</span><span class="s">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_fitness_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_mutation_rate</span><span class="p">(</span><span class="o">.</span><span class="mo">025</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_selections</span><span class="p">(</span>
+    <span class="n">FitnessElites</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="o">.</span><span class="mo">05</span><span class="p">),</span>
+    <span class="n">FitnessTournament</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="n">tournament_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_crossover_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_children_per_crossover</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_replacement_selections</span><span class="p">(</span>
+        <span class="n">ReplacementTournament</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="n">tournament_size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_maintain_history</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_timeouts</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="c">#   All the parameters have been set.</span>
+</pre></div>
+
+
+<h3>Creation of the Sample Data</h3>
+<p>At this point, the parameters are set and the process is almost ready to
+run.  The only thing missing is the data.  This will be injected into the
+genotypes.  However, first the initial genotypes need to be created.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">create_genotypes</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Normally, the data would be done a little differently in a program, but
+it is here because it makes more sense in the narrative.  The data is similar
+to the neural network tutorial.  A sinusoidal population is created and
+randomly selected to be either in the learning data or the testing data.</p>
+<div class="codehilite"><pre><span class="c">#   all samples are drawn from this population</span>
+<span class="n">pop_len</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">pop_len</span><span class="p">)</span>
+<span class="n">population</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span> <span class="o">+</span> \
+                <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">)]</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pop_len</span><span class="p">)]</span>
+
+<span class="n">all_inputs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_targets</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">population_gen</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function shuffles the values of the population and yields the</span>
+<span class="sd">    items in a random fashion.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pop_sort</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">population</span><span class="p">]</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">pop_sort</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pop_sort</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">item</span>
+
+<span class="c">#   Build the inputs</span>
+<span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">population_gen</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+    <span class="n">all_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">pop_len</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()])</span>
+    <span class="n">all_targets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">])</span>
+</pre></div>
+
+
+<p>Now that the data has been created, it is placed into each genotype in the
+population.  If this were a real application, it might make more sense to use a
+generator here that pulls data from a common source.</p>
+<div class="codehilite"><pre><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">ges</span><span class="o">.</span><span class="n">population</span><span class="p">:</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">all_inputs</span> <span class="o">=</span> <span class="n">all_inputs</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">all_targets</span> <span class="o">=</span> <span class="n">all_targets</span>
+</pre></div>
+
+
+<h3>Run</h3>
+<p>Now, evolution is ready to take its course.</p>
+<div class="codehilite"><pre><span class="k">print</span> <span class="n">ges</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;Final Fitness list sorted best to worst:&quot;</span>
+<span class="k">print</span> <span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="o">.</span><span class="n">sorted</span><span class="p">()</span>
+<span class="k">print</span>
+<span class="k">print</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">ges</span><span class="o">.</span><span class="n">population</span><span class="p">[</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="o">.</span><span class="n">best_member</span><span class="p">()]</span>
+<span class="n">program</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">local_bnf</span><span class="p">[</span><span class="s">&#39;program&#39;</span><span class="p">]</span>
+
+<span class="n">saved_model</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">local_bnf</span><span class="p">[</span><span class="s">&#39;&lt;saved_name&gt;&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c">#   We will create a brand new model</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">saved_model</span><span class="p">)</span>
+</pre></div>
+
+
+<p>A sample produced:  The following is a chart of the best fitness values for each
+generation.  The fitness values rapidly improved until hitting the elbow,
+followed by a more placid descent.</p>
+<p><img alt="Fitness values shown by generation."
+src="./static/images/genn_fitness.png"></p>
+<p>The actual characteristics of the model generated are as follows:</p>
+<ul>
+<li>Mean Squared Error: 0.0328</li>
+<li>Activation Type: sigmoid</li>
+<li>Hidden Nodes: 5 + 1 bias node</li>
+<li>Learn Rate: 0.4</li>
+<li>Epochs: 300</li>
+</ul>
+<p>A comparison chart below shows the population and the test samples pulled from the
+population.  While this is toy problem, one might note that the learning
+set was used solely for computing the appropriate connection weights.  The fitness
+values derived from the validation set.  Only the final run of the model used
+the test data.</p>
+<p><img  class="leftimg" alt="Neural genetic hybrid results"
+src="./static/images/genn_results.png"></p>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

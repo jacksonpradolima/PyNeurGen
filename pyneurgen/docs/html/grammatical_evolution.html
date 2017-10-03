@@ -1,0 +1,118 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_ge.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./fitness_functions.html">Fitness Functions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./ge_suggestions.html">Suggestions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Genetic Algorithms</h2>
+<p>Genetic algorithms are derived from biological themes associated with DNA.  A
+series of genotypes are generated, which are random strings of ones and zeros.
+The group of them constitute a population.  To get from random strings to
+solving a problem, there needs to be a mechanism, similar to transcription,
+which maps the unique combination of ones and zeros to a process which solves
+the problem.  This is called a fitness function.</p>
+<p>The fitness function takes the ones and zeros, and implements a solution.  By
+calculating a fitness function for each genotype, the quality of the solution
+that a genotype encodes is determined.  Some solutions are going to be
+better than others.  The fitness selection process selects some of the best
+genotypes and combines features from pairs of those, some are mutated slightly
+by changing a 1 to 0 or vice versa, and the worst are replaced.  This cycle is
+referred to as a generation.  This cycle is then repeated.  Over time, the
+solutions that are closer to solving the problem become more common. Eventually,
+the problem is sufficiently solved and the process completes. The particular
+flavor of genetic algorithms/programming used is a technique called
+<strong>grammatical evolution</strong>.</p>
+<p>Grammatical evolution uses a grammar in a Backus-Naur form, which defines
+variables and statements, using the genotype as selector of the form.  The met
+hod is particularly useful because it can produce syntactically correct
+programs, and enables a great deal of control over output from modest changes to
+fixed sets of statements to a wildly unconstrained profusion of code.</p>
+<h3>Implementation</h3>
+<p>This implementation of grammatical evolution in Python:</p>
+<ul>
+<li>Supports wrapping of the genotype while mapping</li>
+<li>Can extend the genotype length while wrapping, allowing more
+nuanced crossovers and mutations</li>
+<li>Supports runtime mapping of variables.  The program is not simply
+predefined and run, but can continue to pull random but reproducible variables
+and functions during runtime.</li>
+<li>There are a number of fitness selection options, such as Elite,
+Tournaments, Fitness Proportionate, and Linear Ranking.</li>
+<li>Mutations can be applied once per genotype, or apply a low mutation
+probability per genotype bit.</li>
+<li>Crossovers have a choice of one or two children.</li>
+</ul>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

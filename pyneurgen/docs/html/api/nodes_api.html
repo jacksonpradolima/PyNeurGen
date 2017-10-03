@@ -1,0 +1,355 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Nodes Module</h1>
+<p>This module implements the nodes for an artficial neural network.</p>
+<h2><a name= "ProtoNode">ProtoNode Class</a></h2>
+<p>This class is the prototype for nodes.  Nodes are the holder of values,
+they activate and they maintain connnections to other nodes.</p>
+<h3>def __init__(self):</h3>
+<p>This function initializes the internal values of the node.  Since
+the class is a prototype, much of this is overridden with the actual
+classes.</p>
+<h3>def get_value(self):</h3>
+<p>This function returns the value of the node.  This is the value prior
+to activation.</p>
+<h3>def _activate(value):</h3>
+<p>This is a stub function.  Activations will vary by node.</p>
+<h3>def _error_func(value):</h3>
+<p>This is a stub function.</p>
+<h3>def activate(self):</h3>
+<p>This function applies the activation function to the value of the node.</p>
+<h3>def error_func(self, value):</h3>
+<p>This function computes the error function, typically the derivative of
+the error.</p>
+<h3>def randomize(self, random_constraint=RANDOM_CONSTRAINT):</h3>
+<p>This function assigns a random value to the input connections.
+The random constraint limits the scope of random variables.</p>
+<h3>def get_activation_type(self):</h3>
+<p>This function returns the activation type of the node.</p>
+<h3>def update_error(self, halt_on_extremes):</h3>
+<p>This function updates the error of the node from upstream errors.</p>
+<p>Depending upon halting on extremes, it also may adjust or halt if
+overflows occur.</p>
+<p>Finally, it computes the derivative of the activation type, and
+modifies the error.</p>
+<h3>def _update_lower_node_errors(self, halt_on_extremes):</h3>
+<p>This function goes through each of the input connections to the node
+and updates the lower nodes.</p>
+<p>The error from the current node is multiplied times the connection
+weight, inspected for bounds limits and posted in the lower node's
+error.</p>
+<h2><a name= "Node">Node Class</a></h2>
+<p>This class implements normal nodes used in the network.  The node type is
+specified, and must be in [ACTIVATION_SIGMOID, ACTIVATION_TANH,
+ACTIVATION_LINEAR].</p>
+<h3>def __init__(self, node_type=None):</h3>
+<p>This function initializes the node type.</p>
+<h3>def set_activation_type(self, activation_type):</h3>
+<p>This function sets the activation type for the node.  Currently
+available values are ACTIVATION_SIGMOID, ACTIVATION_TANH,
+ACTIVATION_LINEAR. When specifying the activation type, the
+corresponding derivative type for the error functions are assigned as
+well.</p>
+<h3>def _set_error_func(self, activation_type):</h3>
+<p>This function sets the error function type.</p>
+<h3>def set_value(self, value):</h3>
+<p>Set value used to avoid the accidental use of setting a value on a
+bias node.  The bias node value is always 1.0.</p>
+<h3>def get_value(self):</h3>
+<p>This function returns the internal value of the node.</p>
+<h3>def feed_forward(self):</h3>
+<p>This function walks the input connections, summing gets the lower node
+activation values times the connection weight.  Then, node is
+activated.</p>
+<h3>def add_input_connection(self, conn):</h3>
+<p>This function adds an input connection.  This is defined as a
+connection that comes from a layer on the input side, or in this
+applicaion, a lower number layer.</p>
+<p>The reason that there is a specific function rather than using just an
+append is to avoid accidentally adding an input connection to a bias
+node.</p>
+<h3>def adjust_weights(self, learnrate, halt_on_extremes):</h3>
+<p>This function adjusts incoming weights as part of the back propagation
+process, taking into account the node error.  The learnrate moderates
+the degree of change applied to the weight from the errors.</p>
+<h3>def _adjust_weight(learnrate, activate_value, error):</h3>
+<p>This function accepts the learn rate, the activated value received
+from a node connected from below, and the current error of the node.</p>
+<p>It then multiplies those altogether, which is an adjustment to the
+weight of the connection as a result of the error.</p>
+<h2><a name= "CopyNode">CopyNode Class</a></h2>
+<p>This class maintains the form used for copy nodes in recurrent networks.
+The copy nodes are used after propagation.  The values from nodes in upper
+layers, such as the hidden nodes are copied to the CopyNode.  The
+source_node defines the node from where the value arrives.</p>
+<p>An issue with using copy nodes, is that you must be careful to
+adhere to a sequence when using the nodes.  For example, if a copy node
+value is a source to another copy node, you will want to copy the values
+from downstream nodes first.</p>
+<h3>def __init__(self):</h3>
+<p>This function initializes the node and sets up initial values for
+weights copied to it.</p>
+<h3>def set_source_node(self, node):</h3>
+<p>Sets the source of previous recurrent values.</p>
+<h3>def get_source_node(self):</h3>
+<p>Gets the source of previous recurrent values.</p>
+<h3>def load_source_value(self):</h3>
+<p>This function transfers the source node value to the copy node value.</p>
+<h3>def get_source_type(self):</h3>
+<p>This function gets the type of source value to use.</p>
+<p>Source type will be either 'a' for the activation value or 'v' for the
+summed input value.</p>
+<h3>def get_incoming_weight(self):</h3>
+<p>This function gets the value that will be multiplied times the
+incoming source value.</p>
+<h3>def get_existing_weight(self):</h3>
+<p>This function gets the value that will be multiplied times the
+existing value.</p>
+<h3>def source_update_config(self, source_type, incoming_weight, existing_weight):</h3>
+<p>This function accepts parameters governing what the source information
+is used, and how the incoming and existing values are discounted.</p>
+<p>Source type can be either 'a' for the activation value or 'v' for the
+summed input value.</p>
+<p>By setting the existing weight to zero, and the incoming discount to
+1.0. An Elman style update takes place.</p>
+<p>By setting the existing weight to some fraction of 1.0 such as .5, a
+Jordan style update can take place.</p>
+<h2><a name= "BiasNode">BiasNode Class</a></h2>
+<p>Bias nodes provide value because of their connections, and their value and
+activation is always 1.0.</p>
+<h3>def __init__(self):</h3>
+<p>This function initializes the node, sets the type, and sets the return
+value to always 1.0.</p>
+<h3>def activate(value=None):</h3>
+<p>The activation of the bias node is always 1.0.</p>
+<h3>def error_func(value=1.0):</h3>
+<p>The activation of the bias node is always 1.0.</p>
+<h2><a name= "Connection">Connection Class</a></h2>
+<p>Connection object that holds the weighting information between nodes
+as well as a reference to the nodes that are connected.</p>
+<h3>def __init__(self, lower_node, upper_node, weight=0.0):</h3>
+<p>The lower_node lives on a lower layer, closer to the input layer.
+The upper mode lives on a higher layer, closer to the output layer.</p>
+<h3>def set_weight(self, weight):</h3>
+<p>This function sets the weight of the connection, which relates to
+the impact that a lower node's activation will have on an upper node's
+value.</p>
+<h3>def add_weight(self, weight):</h3>
+<p>This function adds to the weight of the connection, which is
+proportional to the impact that a lower node's activation will
+have on an upper node's value.</p>
+<h3>def get_weight(self):</h3>
+<p>This function sets the weight of the connection, which is relates to
+the impact that a lower node's activation will have on an upper node's
+value.</p>
+<h3>def sigmoid(value):</h3>
+<p>Calculates the sigmoid .</p>
+<h3>def sigmoid_derivative(value):</h3>
+<p>Calculates the derivative of the sigmoid for the value.</p>
+<h3>def tanh(value):</h3>
+<p>This function calculates the hyperbolic tangent function.</p>
+<h3>def tanh_derivative(value):</h3>
+<p>This function calculates the tanh derivative of the value.</p>
+<h3>def linear(value):</h3>
+<p>This function simply returns the value given to it.</p>
+<h3>def linear_derivative(value):</h3>
+<p>This function returns 1.0.  Normally, I would just return 1.0, but pylint
+was complaining.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,146 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_ge.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./fitness_functions.html">Fitness Functions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./ge_suggestions.html">Suggestions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h1>Suggestions for using Grammatical Evolution</h1>
+<h2>Limit your search space</h2>
+<p>Part of the appeal in using such a technique derives from not necessarily
+knowing the search space of possible solutions.  In other words, if you
+had a better technique that would effectively solve the problem you would
+use it. So, there can be a tendency to simply try everything that you can
+imagine, and let grammatical evolution sort it out.</p>
+<p>This will not work, because you can easily build a search space that is so
+enormous, that even with many generations, only a fraction of the space can
+be evaluated.</p>
+<p>Try to use as few choices as you can, but not less than you need.  Unfortunately,
+this is art not science for this choice.</p>
+<h2>Limit Your Program Size</h2>
+<p>An equation or code generation machine does not know at the time that what is
+being produced is useful or not.  The code for any particular iteration can
+end up with a repetitive, degenerate looping of odd functions that have no
+meaning or usefulness.  By limiting the program size, your process can cut off
+the program generation so that less time is used testing unproductive programs.</p>
+<h2>Use Program Size as Part of Your Fitness Value</h2>
+<p>Suppose that your process generates many solutions that are sufficently close
+to your fitness value, but many of those solutions have code that is fairly convoluted,
+such as sin(cos(-3.3 * sin(cos(2. * x)))).  Push the solution toward simple and
+elegant approaches by using the size of the program to modify your fitness
+value.</p>
+<p>The generated test program runs within the name space of the genotype. This means that
+you have access to the self values.</p>
+<p>Here is a slight example to illustrate the concept. Just before executing the generated
+program, a copy is put in the local_bnf of the genotype object.  Assume that the
+purpose of a run is to maximize a fitness_value:</p>
+<div class="codehilite"><pre><span class="o">...</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">your</span> <span class="n">generated</span> <span class="n">program</span> <span class="n">would</span> <span class="n">be</span> <span class="n">above</span> <span class="n">here</span>
+
+<span class="c">#</span>
+<span class="n">fitness_value</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">some</span> <span class="n">generated</span> <span class="n">value</span> <span class="n">here</span><span class="o">&gt;</span>
+
+<span class="n">program_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_bnf</span><span class="p">[</span><span class="s">&#39;program&#39;</span><span class="p">])</span>
+
+<span class="n">fitness_value</span> <span class="o">/=</span> <span class="n">program_size</span>
+</pre></div>
+
+
+<p>Larger programs would decrease the fitness value more than smaller programs, giving
+your process a basis for favoring smaller solutions.  In addition, if a particular
+function is being built, you could simply parse the program for that function and
+evaluate on the size of that function alone.</p>
+<h2>Design Your Fitness Value Approach</h2>
+<p>Try to design the process to generate fitness values that can move ever closer to an
+effective solution.  Suppose your process was a random process and you simply wait for
+the best fitness value to show up.  Generally speaking, such a process will take longer
+than a process where the system can learn from previous generations and effectively
+improve on past generations.  So, where possible try to design your process so that the
+right answer is not just a shot in the dark.</p>
+<h2>Create Your Own Fitness Class</h2>
+<p>You can create your own fitness class.  For example, a comparison could be made of the
+distribution of fitness values versus your own criteria. Such a technique might derive
+from the need to create a family of solutions, rather than just a one.</p>
+<p>This technique for doing this could be as follows:</p>
+<ul>
+<li>Create a function that accepts the fitness_list and evaluates in some fashion.</li>
+<li>Return True to continue processing.</li>
+<li>Return False to end the process.</li>
+<li>Add the function to the grammatical evolution class.</li>
+</ul>
+<p>For example:</p>
+<div class="codehilite"><pre><span class="n">ges</span> <span class="o">=</span> <span class="n">GrammaticalEvolution</span><span class="p">()</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">stopping_criteria</span><span class="p">[</span><span class="n">STOPPING_FITNESS_LANDSCAPE</span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">new_fitness_function</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

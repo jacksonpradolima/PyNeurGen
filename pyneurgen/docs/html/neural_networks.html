@@ -1,0 +1,114 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_nn.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./recurrent.html">Network Taxonomy</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Neural Networks</h2>
+<p>Neural networks can be used to solve a variety of problems that are
+difficult to solve in other fashions.  The approach uses supervised learning.
+ The basic motif is to gather a set of inputs and a set of target outputs and
+the network builds a bridge between the two.  Such networks are chiefly used to
+solve non-linear problems.</p>
+<p>Neural networks are roughly based on biological metaphors for nerves.  The
+neural network accepts inputs and applies a weighting system to calculate a
+series of intermediate values stored in what are termed nodes or neurons. To
+extend the biological metaphor, the value may be sufficient to cause the neuron
+to fire or activate, resulting in an activation value from the neuron that is
+greater than the sum of the weights received by the neuron.  Because of this
+activation feature a non-linear result is possible.</p>
+<p>By comparing the outputs to the target values, an error gradient is
+created. Using a technique call back propagation, the weights of the nodes
+leading up to the output are proportionally adjusted according to the error
+curve slope. By successively cycling inputs and targets, and adjustments to the
+weights, the network weights are slowly shifted so that outputs of the network
+more closely mirror the desired target values.</p>
+<h3>Implementation</h3>
+<p>This implementation supports various kinds of network structures and neuron
+types:</p>
+<p>Network structures:</p>
+<ul>
+<li>Multiple hidden layers</li>
+<li>Sparse networks</li>
+<li>Skip layer connections</li>
+<li>Recurrent networks</li>
+</ul>
+<p>Neuron types:</p>
+<ul>
+<li>Sigmoidal, tanh, and linear activation functions</li>
+<li>Activation functions can be set by node or layer</li>
+<li>Easily subclassed custom activation functions</li>
+</ul>
+<h3>Processing:</h3>
+<ul>
+<li>Test input can be randomly processed for each epoch</li>
+</ul>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

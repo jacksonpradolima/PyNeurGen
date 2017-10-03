@@ -1,0 +1,442 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Neuralnet Module</h1>
+<p>This module implements the components for an artficial neural network.</p>
+<h2><a name= "NeuralNet">NeuralNet Class</a></h2>
+<p>This class implements a standard multi-layered perceptron (MLP).</p>
+<h3>def __init__(self):</h3>
+<p>Because there are a number of parameters to specify, there are
+no specific variables that are initialized within __init__.</p>
+<h3>def init_layers(self, input_nodes, total_hidden_nodes_list, output_nodes, *recurrent_mods):</h3>
+<p>This function initializes the layers.
+The variables:</p>
+<ul>
+<li>input_nodes: the number of nodes in the input layer</li>
+<li>total_hidden_nodes_list:  a list of numbers of nodes in the
+hidden layer.  For example, [5, 3]</li>
+<li>output_nodes: the number of nodes in the output layer</li>
+</ul>
+<p>The initial network is created, and then a series of modifications can
+be made to enable recurrent features.  recurrent_mods are
+configurations for modifications to the neural network that is created
+within init_layers.</p>
+<p>For example, if
+init_layers(input_nodes, total_hidden_nodes_list, output_nodes,
+ElmanSimpleRecurrent())
+was used, then the initial network structure of input, hidden, and
+output nodes would be created.  After that, the additional copy or
+context nodes that would automatically transfer values from the lowest
+hidden layer would be added to the input layer.</p>
+<p>More than one recurrent scheme can be applied, each one adding to the
+existing network.</p>
+<h3>def set_halt_on_extremes(self, halt):</h3>
+<p>This function sets the flag as to whether the program should halt when
+experiencing extremely positive or negative numbers.  This can happen
+when using linear functions and data that may not be normalized.  Such
+things as nan and inf can be experienced otherwise.  Not halting
+instead, simply scales back the values to LARGEVALUE_LIMIT and
+NEGVALUE_LIMIT. A satisfactory output from the network may be in doubt,
+but at least it gives it the possibility.</p>
+<h3>def get_halt_on_extremes(self):</h3>
+<p>This function returns the True/False flag for halting on extremes.</p>
+<h3>def set_random_constraint(self, constraint):</h3>
+<p>This fuction sets a value between 0 and 1 for limiting the random
+weights upon initialization.  For example, .8 would limit weights to
+-.8 through .8.</p>
+<h3>def get_random_constraint(self):</h3>
+<p>This function gets the random constraint used in weights
+initialization.s</p>
+<h3>def set_epochs(self, epochs):</h3>
+<p>This function sets the number of epochs or cycles through the learning
+data.</p>
+<h3>def get_epochs(self):</h3>
+<p>This function gets the number of epochs that will run during learning.</p>
+<h3>def set_time_delay(self, time_delay):</h3>
+<p>This function sets a value for time delayed data.  For example, is the
+time delay was 5, then input values would be taken 5 at a time.  Upon
+the next increment the next input values would be 5, with 4 of the
+previous values included, and one new value.</p>
+<h3>def get_time_delay(self):</h3>
+<p>This function gets the time delay to be used with timeseries data.</p>
+<h3>def set_all_inputs(self, allinputs):</h3>
+<p>This function sets the inputs.  Inputs are basically treated as a
+list.</p>
+<h3>def set_all_targets(self, alltargets):</h3>
+<p>This function sets the targets.</p>
+<h3>def set_learnrate(self, learnrate):</h3>
+<p>This function sets the learn rate for the modeling.  It is used to
+determine how much weight to associate with an error when learning.</p>
+<h3>def get_learnrate(self):</h3>
+<p>This function gets the learn rate for the modeling.  It is used to
+determine how much weight to associate with an error when learning.</p>
+<h3>def _set_data_range(self, data_type, start_position, end_position):</h3>
+<p>This function sets the data positions by type</p>
+<h3>def set_learn_range(self, start_position, end_position):</h3>
+<p>This function sets the range within the data that is to used for
+learning.</p>
+<h3>def get_learn_range(self):</h3>
+<p>This function gets the range within the data that is to used for
+learning.</p>
+<h3>def _check_time_delay(self, position):</h3>
+<p>This function checks the position or index of the data and determines
+whether the position is consistent with the time delay that has been
+set.</p>
+<h3>def get_learn_data(self, random_testing=None):</h3>
+<p>This function is a generator for learning data.  It is assumed that in
+many cases, this function will be over-written with a situation
+specific function.</p>
+<h3>def get_validation_data(self):</h3>
+<p>This function is a generator for validation data.  It is assumed that
+in many cases, this function will be over-written with a situation
+specific function.</p>
+<h3>def get_test_data(self):</h3>
+<p>This function is a generator for testing data.  It is assumed that in
+many cases, this function will be over-written with a situation
+specific function.</p>
+<h3>def _get_data(self, start_position, end_position):</h3>
+<p>This function gets an input from the list of all inputs.</p>
+<h3>def _get_randomized_position(start_position, end_position):</h3>
+<p>This function accepts integers representing a starting and ending
+position within a set of data and yields a position number in a random
+fashion until all of the positions have been exhausted.</p>
+<h3>def _check_positions(self, start_position, end_position):</h3>
+<p>This function evaluates validates, somewhat, start and end positions
+for data ranges.</p>
+<h3>def set_validation_range(self, start_position, end_position):</h3>
+<p>This function sets the start position and ending position for the
+validation range.  The first test period is often used to test the
+current weights against data that is not within the learning period
+after each epoch run.</p>
+<h3>def get_validation_range(self):</h3>
+<p>This function gets the start position and ending position for the
+validation range.  The first test period is often used to test the
+current weights against data that is not within the learning period
+after each epoch run.</p>
+<h3>def set_test_range(self, start_position, end_position):</h3>
+<p>This function sets the start position and ending position for
+the out-of-sample range.</p>
+<h3>def get_test_range(self):</h3>
+<p>This function gets the start position and ending position for
+the out-of-sample range.</p>
+<h3>def _init_connections(self):</h3>
+<p>Init connections sets up the linkages between layers.</p>
+<p>This function connects all nodes, which is typically desirable
+However, note that by substituting in a different process, a
+sparse network can be achieved.  And, there is no restriction
+to connecting layers in a non-traditional fashion such as skip-layer
+connections.</p>
+<h3>def _connect_layer(self, layer):</h3>
+<p>Generates connections to the lower layer.</p>
+<p>If it is the input layer, then it's skipped
+It could raise an error, but it seems pointless.</p>
+<h3>def randomize_network(self):</h3>
+<p>This function randomizes the weights in all of the connections.</p>
+<h3>def learn(self, epochs=None, show_epoch_results=True, random_testing=False, show_sample_interval=0):</h3>
+<p>This function performs the process of feeding into the network inputs
+and targets, and computing the feedforward process.  After the
+feedforward process runs, the actual values calculated by the output
+are compared to the target values.  These errors are then used by the
+back propagation process to adjust the weights for the next set of
+inputs. If a recurrent netork structure is used, the stack of copy
+levels is pushed with the latest set of hidden nodes.</p>
+<p>Then, the next set of inputs is input.</p>
+<p>When all of the inputs have been processed, resulting in the
+completion of an epoch, if show_epoch_results=True, then the MSE will
+be printed.</p>
+<p>Finally, if random_testing=True, then the inputs will not be processed
+sequentially.  Rather, the inputs will be sorted into a random order
+and then input.  This is very useful for timeseries data to avoid
+autocorrelations.</p>
+<h3>def validate(self, show_sample_interval=0):</h3>
+<p>This function loads and feedforwards the network with validation data.
+Optionally, it can also store the actuals as well.</p>
+<h3>def test(self, show_sample_interval=0):</h3>
+<p>This function loads and feedforwards the network with test data.
+Optionally, it can also store the actuals as well.</p>
+<h3>def _evaluate(self, eval_type, show_sample_interval):</h3>
+<p>This function loads and feedforwards the network with data.
+eval_type is either validation or test data ('t' or 'v')
+Optionally, it can also store the actuals as well.</p>
+<h3>def calc_mse(total_summed_errors, count):</h3>
+<p>This function calculates mean squared errors.</p>
+<h3>def process_sample(self, inputs, targets, learn=False):</h3>
+<p>Accepts inputs and targets, then forward and back propagations.  A
+comparison is then made of the generated output with the target values.</p>
+<p>Note that this is for an incremental learn, not the full set of inputs
+and examples.</p>
+<h3>def _feed_forward(self):</h3>
+<p>This function starts with the first hidden layer and
+gathers the values from the lower layer, applies the
+connection weightings to those values, and activates the
+nodes.  Then, the next layer up is selected and the process
+is repeated; resulting in output values in the upper-most
+layer.</p>
+<h3>def _back_propagate(self):</h3>
+<p>Backpropagate the error through the network. Aside from the
+initial compution of error at the output layer, the process takes the
+top hidden layer, looks at the output connections reaching up to the
+next layer, and carries the results down through each layer back to the
+input layer.</p>
+<h3>def _update_error(self, toponly):</h3>
+<p>This function goes through layers starting with the top hidden layer
+and working its way down to the input layer.</p>
+<p>At each layer, the errors are updated in the nodes from the errors and
+weights in connections to nodes in the upper layer.</p>
+<h3>def _zero_errors(self):</h3>
+<p>This function sets the node errors to zero in preparation for back
+propagation.</p>
+<h3>def _adjust_weights(self):</h3>
+<p>This function goes through layers starting with the top hidden layer
+and working its way down to the input layer.</p>
+<p>At each layer, the weights are adjusted based upon the errors.</p>
+<h3>def calc_sample_error(self):</h3>
+<p>The mean squared error (MSE) is a measure of how well the outputs
+compared to the target values.</p>
+<h3>def _copy_levels(self):</h3>
+<p>This function advances the copy node values, transferring the values
+from the source node to the copy node.  In order to avoid stomping on
+the values that are to be copies, it goes from highest node number to
+lowest.</p>
+<p>No provision is made at this point to exhaustively check precedence.</p>
+<h3>def _parse_inputfile_layer(self, config, layer_no):</h3>
+<p>This function loads a layer and nodes from the input file. Note that
+it does not load the connections for those nodes here, waiting
+until all the nodes are fully instantiated.  This is because
+the connection objects have nodes as part of the object.</p>
+<h3>def _parse_inputfile_node(config, node_id):</h3>
+<p>This function receives a node id, parses it, and returns the node in
+the network to which it pertains.  It implies that the network
+structure must already be in place for it to be functional.</p>
+<h3>def _parse_inputfile_conn(self, conn_strs, node):</h3>
+<p>This function instantiates a connection based upon the
+string loaded from the input file.
+Ex.  node-1:0, 0.166366874487</p>
+<h3>def _parse_inputfile_copy(self, source_str):</h3>
+<p>This function instantiates a source node.</p>
+<h3>def _parse_node_id(node_id):</h3>
+<p>This function parses the node_id received from the input file.
+Format of node id: 'node-%s:%s' % (layer_no, node_no)</p>
+<p>Returns layer_no and node_no</p>
+<h3>def load(self, filename):</h3>
+<p>This function loads a file that has been saved by save funtion.  It is
+designed to be used when implementing a run-time version of the neural
+network.</p>
+<h3>def output_values(self):</h3>
+<p>This function outputs the values of the network.  It is meant to be
+sufficiently complete that, once saved to a file, it could be loaded
+back from that file completely to function.</p>
+<p>To accommodate configparser, which is used as the file format, there is
+a form of [category],
+label = value</p>
+<p>Since there are also no sub-categories possible, so the naming
+structure is designed to take that into account. This accommodation
+also leads to a couple design choices: Each layer is given a separate
+category and a list of nodes follows.  Then each node has a separate
+category identifying it by layer number and node number.  This can't be
+inferred from just knowing the number of nodes in the layer and
+sequentially reading, because if a sparse network is used, then the
+node numbers may be out of sync with the position of the node within of
+the layer.</p>
+<h3>def _node_id(node):</h3>
+<p>This function receives a node, and returns an text based id that
+uniquely identifies it within the network.</p>
+<h3>def save(self, filename):</h3>
+<p>This function saves the network structure to a file.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

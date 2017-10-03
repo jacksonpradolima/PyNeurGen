@@ -1,0 +1,23 @@
+Thanks
+================================================
+
+I have benefitted from a number of great resources.  I should particularly
+note the book Biologically Inspired Algorithms for Financial Modelling by
+Anthony Brabazon and Michael O'Neill where I read about the technique
+'grammatical evolution'.  I particularly like the simplicity for mapping
+genotypes to programming applications, coupled with ease of controlling the
+level of complexity necessary accomplish the task.  There are a number of
+other applications for grammatical evolution that would great to implement as
+well.
+
+I should also note the book Adaptive Learning of Polynomial Networks by
+Nikolay Y. Nikolaev and Hitoshi Iba.  While I would like to support polynomial
+networks in this package, it was not possible in the initial version.  This
+book has a very lucid discussion of fitness landscapes.  My fitness objects
+benefitted greatly from their discussions of fitness functions.
+
+Any mistakes in implementation are my own.
+
+Don Smiley
+May, 2008
+

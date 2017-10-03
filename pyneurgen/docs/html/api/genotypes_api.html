@@ -1,0 +1,346 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Genotypes Module</h1>
+<p>This module implements genotypes for grammatical evolution.</p>
+<h2><a name= "Genotype">Genotype Class</a></h2>
+<p>The Genotype class holds the genetic material.  It has the ability to run
+fitness functions and mutate.  It is an internal object, and so few aspects
+of it would be regarded as public.</p>
+<p>The class takes many properties from the grammatical evolution class, and
+so in some ways it might seem to be unnecessarily duplicative.  The reason
+for doing it this way is to make each genotype relatively complete on its
+own.  That way, if the genotype is packed up and marshalled off to a remote
+device for processing, everything is there to handle the tasks.</p>
+<h3>def __init__(self, start_gene_length, max_gene_length,member_no):</h3>
+<p>This function initiates the genotype.  It must open with the starting
+gene length and the maximum gene length.  These lengths are the decimal
+lengths not the binary lengths.  In addition, the member number is
+needed, since the genotype creation process is controlled by the
+grammatic evolution class.</p>
+<h3>def _generate_binary_gene(self, length):</h3>
+<p>This function creates a random set of bits.</p>
+<h3>def set_binary_gene(self, binary_gene):</h3>
+<p>This function sets the value of the binary gene directly.  This is
+used in the crossover and mutation functions.  There is an automatic
+adjustment to trim the length to a multiple of 8.</p>
+<h3>def generate_decimal_gene(self):</h3>
+<p>This function converts the binary gene to a usable decimal gene.</p>
+<h3>def _dec2bin_gene(dec_gene):</h3>
+<p>This is a utility function that converts a decimal list to binary
+string.</p>
+<h3>def _place_material(program, item, start_pos, end_pos):</h3>
+<p>This is a utility function that replaces a part of a string in a
+specific location.</p>
+<h3>def runtime_resolve(self, item, return_type):</h3>
+<p>This function is callable by the generated program to enable
+additional values be pulled from genotype and BNF as the need arises
+during execution of the program.</p>
+<p>Usage is self.runtime_resolve('<myvariable>', return_type);</p>
+<p>The return type casts the result back to the format needed.  Supported
+return types are: 'int', 'float', 'str', and 'bool'.</p>
+<h3>def _fmt_resolved_vars(value, return_type):</h3>
+<p>This method formats the result for a resolved variable for use
+during runtime so that the information can fit into the context of what
+is running.</p>
+<p>Note that if the execute code was to be subclassed to a parser to avoid
+the use of exec, then this funtion should also be done as well, since
+it uses eval.</p>
+<h3>def set_bnf_variable(self, variable_name, value):</h3>
+<p>This function adds a variable to the bnf.  The format is the name,
+typically bounded by &lt;&gt;, such as "<variable_name>", and the parameters
+are in the form of a list. The items in the list will be converted to
+strings, if not already.</p>
+<h3>def resolve_variable(self, variable):</h3>
+<p>This function receives a variable and using the variable as a key
+looks it up in the local_bnf.  The list of possible values available
+are then used by the genotype via a codon to select a final value that
+would be used.</p>
+<h3>def _map_variables(self, program, check_stoplist):</h3>
+<p>This function looks for a variable in the form of <variable>.  If
+check_stoplist is True, then there will be a check to determine if it
+is a run-time variable, and therefor will be resolved later.</p>
+<p>This process runs until all of the variables have been satisfied, or a
+time limit on the process has been reached.</p>
+<h3>def on_stoplist(item):</h3>
+<p>Checks the stop list for runtime variables</p>
+<h3>def _get_codon(self):</h3>
+<p>This function gets the next decimal codon from the genotype.</p>
+<p>There are two counters for this function. One pointer is used to
+indicate the next location of the decimal code that is to be returned.
+The other pointer is the index of the codon that has been drawn
+regardless if process has wrapped around.</p>
+<p>If the end of the genotype is reached, and the wrap flag is True, then
+the position for the next codon is taken from the front again.
+Additionally, if wrapping has taken place and the extend_genotype flag
+is set, then the genotype will continue to grow in length until the
+max_gene_length is reached.</p>
+<p>If the wrap flag is not set, when the end of the genotype is
+reached, an error is raised.</p>
+<p>At the start of this function, the position has been already
+incremented to get the codon.  Therefore, the position has to be
+checked to determine whether it is pointing past the end of of the
+maximum length of the gene. If it is, then the position is just
+reset back to the starting position.</p>
+<h3>def _reset_gene_position(self):</h3>
+<p>This function resets the next decimal gene that will be selected back
+to 0.  The point of this is when reusing a gene that is already
+instantiated, you can regenerate your program using exactly the same
+characteristics as before.</p>
+<h3>def _update_genotype(self):</h3>
+<p>This function updates the binary genotype from the decimal gene if the
+genotype is extended.</p>
+<h3>def compute_fitness(self):</h3>
+<p>This function computes the fitness function.  The process consists
+mapping the codon to the program variables and running the resulting
+program and computing the fitness value.  In addition, the binary gene
+is updated if the decimal gene has been extended.</p>
+<h3>def _map_gene(self):</h3>
+<p>This function applies the genotype information to build a program.
+Mapping the variables into the search space is an initial load, and can
+also iteratively accept values as the program that has been created
+executes via the runtime_resolve function.</p>
+<p>If for any reason the mapping process fails to create a viable
+program, or it takes too long, then the process is aborted and the
+fitness_fail value is applied instead.</p>
+<p>This function uses the print command to show the program that has been
+generated as well as print the fitness value.  It is expected that this
+will be converted to a more useful logging system at some point.</p>
+<h3>def _execute_code(self, program):</h3>
+<p>This function executes code that has been generated. This function
+would be subclassed if executing the code on a remote server, or
+swapping in a custom parser.</p>
+<h3>def mutate(self, mutation_rate, mutation_type):</h3>
+<p>This is function randomly mutates a binary genotype by changing 1 to 0
+and vice versa.  It is not context-perserving at this level.</p>
+<h3>def _multiple_mutate(self, mutation_rate):</h3>
+<p>This function walks the gene and based upon the mutation rate will
+alter a bit.</p>
+<h3>def get_binary_gene_length(self):</h3>
+<p>This function returns the length of the binary gene.  Which is
+8 times the length of the decimal gene.</p>
+<h3>def _single_mutate(self):</h3>
+<p>This function with a randomly selects a mutation point within the gene
+and changes a 1 to 0, or vice versa.</p>
+<h3>def _mutate(gene, position):</h3>
+<p>This function does the actual mutation of the gene at a specific
+position.</p>
+<h3>def _select_choice(codon, selection):</h3>
+<p>This function, based upon the codon, makes a choice from the list.
+The determination is based upon the module of the codon to the length
+of the list of choices.  For example, if the codon is 10 and the list
+is 7 choices long, then the selection would be from selection[3].  This
+ensures that for every codon for every selection there is some choice.</p>
+<h3>def get_program(self):</h3>
+<p>This function returns the program that has been generated.  It is only
+valid after the gene has been mapped.</p>
+<h3>def get_preprogram(self):</h3>
+<p>This function returns the prototype program to which the variables
+will be applied.</p>
+<h3>def get_fitness(self):</h3>
+<p>This function returns the fitness value that has been created as a
+result of running the fitness function.</p>
+<h3>def get_fitness_fail(self):</h3>
+<p>This function returns the fitness value that constitutes failure as
+assigned by the parent grammatical evolution.</p>
+<h3>def conv_int(str_value):</h3>
+<p>This method attempts to convert string value to an int.  This function
+used to live inside self._fmt_resolved_vars, but was taken out because
+it is easier to do unit testing this way.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

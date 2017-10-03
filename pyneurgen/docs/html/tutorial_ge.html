@@ -1,0 +1,437 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_ge.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./fitness_functions.html">Fitness Functions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./ge_suggestions.html">Suggestions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Grammatical Evolution Tutorial:</h2>
+<p>This tutorial presents a short, easy problem to solve using Grammatical
+Evolution techniques with this software.  The example uses only the
+grammatical evolution portion rather than a hybrid for clarity.</p>
+<h3>Installation</h3>
+<p>The quickest way to install is with easy_install.  Since this is a Python library,
+at the Python prompt put:</p>
+<div class="codehilite"><pre><span class="n">easy_install</span> <span class="n">pyneurgen</span>
+</pre></div>
+
+
+<h2>The Problem</h2>
+<p>The problem is fairly trivial, but should be sufficient to gain an
+appreciation for methods to solve problems using grammatical evolution.  The
+problem to solve:</p>
+<p>For values 0 to 99, what expression could be used to minimize:</p>
+<div class="codehilite"><pre><span class="nb">abs</span><span class="p">(</span><span class="n">expression</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+
+<p>The program will come up with an appropriate answer.</p>
+<p>The first step, import modules that we will use:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pyneurgen.grammatical_evolution</span> <span class="kn">import</span> <span class="n">GrammaticalEvolution</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.fitness</span> <span class="kn">import</span> <span class="n">FitnessElites</span><span class="p">,</span> <span class="n">FitnessTournament</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.fitness</span> <span class="kn">import</span> <span class="n">ReplacementTournament</span><span class="p">,</span> <span class="n">MAX</span><span class="p">,</span> <span class="n">MIN</span><span class="p">,</span> <span class="n">CENTER</span>
+</pre></div>
+
+
+<p>The next task is to specify a grammar that will be referenced as well as a
+stub of a program, or at least an appropriate starting point to get the
+evolutionary process running.  Then, we define some of the starting
+parameters.</p>
+<h3>Backus-Naur form</h3>
+<p>The point of the grammar is to define variables and the possible
+assignments that can be made to the variables.  It is by the use of
+grammatical evolution that assignments of the variables will be made, and
+final assembly of a program.  There is one program generated per genotype. Any
+language can be defined by the grammar, as long as there is an appropriate
+executor when it comes to runtime of that program. In this case we will stick
+with Python. The grammar uses a Backus-Naur form (BNF), with a structure
+of:</p>
+<div class="codehilite"><pre><span class="sr">&lt;variable&gt;</span>   <span class="o">::=</span> <span class="n">this</span> <span class="o">|</span> <span class="n">is</span> <span class="o">|</span> <span class="n">a</span> <span class="o">|</span> <span class="n">list</span> <span class="o">|</span> <span class="n">of</span> <span class="o">|</span> <span class="n">options</span>
+</pre></div>
+
+
+<p>A variable is identifiable because of the angle brackets around it.  It
+is also separated from the list of options by ::=.
+The following is the BNF that will be used for this example:</p>
+<div class="codehilite"><pre><span class="n">bnf</span> <span class="o">=</span>   <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;expr&gt;              ::= &lt;expr&gt; &lt;biop&gt; &lt;expr&gt; | &lt;uop&gt; &lt;expr&gt; | &lt;real&gt; |</span>
+<span class="s">                        math.log(abs(&lt;expr&gt;)) | &lt;pow&gt; | math.sin(&lt;expr&gt; )|</span>
+<span class="s">                        value | (&lt;expr&gt;)</span>
+<span class="s">&lt;biop&gt;              ::= + | - | * | /</span>
+<span class="s">&lt;uop&gt;               ::= + | -</span>
+<span class="s">&lt;pow&gt;               ::= pow(&lt;expr&gt;, &lt;real&gt;)</span>
+<span class="s">&lt;plus&gt;              ::= +</span>
+<span class="s">&lt;minus&gt;             ::= -</span>
+<span class="s">&lt;real&gt;              ::= &lt;int-const&gt;.&lt;int-const&gt;</span>
+<span class="s">&lt;int-const&gt;         ::= &lt;int-const&gt; | 1 | 2 | 3 | 4 | 5 | 6 |</span>
+<span class="s">                        7 | 8 | 9 | 0</span>
+<span class="s">&lt;S&gt;                 ::=</span>
+<span class="s">import math</span>
+<span class="s">total = 0.0</span>
+<span class="s">for i in xrange(100):</span>
+<span class="s">    value = float(i) / float(100)</span>
+<span class="s">    total += abs(&lt;expr&gt; - pow(value, 3))</span>
+<span class="s">fitness = total</span>
+<span class="s">self.set_bnf_variable(&#39;&lt;fitness&gt;&#39;, fitness)</span>
+<span class="s">        &quot;&quot;&quot;</span>
+</pre></div>
+
+
+<p>As you can see, there are a number of variables and optional values that
+can take place.  Note that some of the options are variables that have angled
+brackets, and some do not.  Those that do not are <strong>terminals</strong>;
+the selection process ends when a terminal is selected.  If a variable selected,
+the program uses the BNF to recursively evaluate the value of the variables found
+until a terminal is reached.</p>
+<p>For example, suppose that <strong>&lt;real&gt;</strong> is selected.  The
+program will see <strong>&lt;int-const&gt;</strong>.<strong>&lt;int-const&gt;</strong> and will
+evaluate the variables one by one. Upon looking up the definition of
+<strong>&lt;int-const&gt;</strong>, it will find a list that could be any of the following
+elements:</p>
+<div class="codehilite"><pre><span class="sr">&lt;int-const&gt;</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="mi">5</span> <span class="o">|</span> <span class="mi">6</span> <span class="o">|</span> <span class="mi">7</span> <span class="o">|</span> <span class="mi">8</span> <span class="o">|</span> <span class="mi">9</span> <span class="o">|</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Using a selection process, which will be covered below, the program will select
+a number or the <strong>&lt;int-const&gt;</strong> and recursively operate until
+<strong>&lt;real&gt;</strong> is defined as a number.  At that point, the
+program will continue with the next variable.</p>
+<p>There is also the <strong>&lt;S&gt;</strong> which is the starting point. The
+starting point can be minimal and open-ended, or fairly structured and limited
+in scope, depending upon the needs of the problem. One other thing, when laying
+out the starting point in code, take into account the use of whitespace in
+Python.  Since this BNF is defined using a string in the form of """text""", the
+returns and spacing will be used in formatting the statements.  That is the
+explanation for the unaesthetic yet important layout above.  This caveat only
+applies to a series of statements in the BNF, not the definitions of variables.
+There are examples found in the demos directory with this package, if there is
+still some confusion about it.</p>
+<h3>Implementation</h3>
+<p>There are some features here that are specific to this implementation.</p>
+<p>Note that from a Python standpoint that it has <strong>self.</strong> in the
+front of the fitness desnignator. That is because the fitness computation
+takes place within the Genotype namespace. If for some reason, you would like
+to intoduce a function from the Genotype class, it can be available in your
+program.</p>
+<p>Another implementation specific feature is
+<strong>self.set_bnf_variable('&lt;value&gt;', value)</strong>.  The purpose
+is to save a variable within the BNF during runtime.  This can be useful to
+temporarily assign during the course of the program. This feature enables the
+possibility of extending the BNF during runtime.</p>
+<p>You should be careful, however, when saving variables that the spirit
+of reproducability is maintained.  While assignment of variables is apparently
+random, you will want a specific genotype to always assign in exactly the same
+fashion.</p>
+<p>Finally, there is an implementation specific feature that must be followed.
+When the fitness computation has ended, the <strong>&lt;fitness&gt;</strong>
+variable with the BNF is used as the fitness value.  In this case, total is
+assigned to fitness, which is then saved to the BNF.  The sheer redundancy is
+used here to help emphasize that <strong>if there is no fitness assigned upon
+completion all of your genotypes will fail every time.</strong></p>
+<h3>Mapping from the Genotype</h3>
+<p>It is the structure of the genotype that defines the choices that are made
+for options. Genotypes in genetic algorithms, and with this implementation as
+well, use strings such as '01010111' and '10110111' to define a genotype.
+Grammatical evolution translates those values 8 bits at time into lists of
+decimal values, such [73, 45, 56, 1, 101]. It is this list that will be used as
+the basis for determining what option is selected.</p>
+<p>The basis for selection derives from the use of remainders. The following
+example will make this clear:  Suppose that <strong>&lt;biop&gt;</strong> has been selected
+and the mapping process needs to determine whether the choice is '+', '-', '*',
+or '/'.  The mapping process takes the next number from the genotype in the
+list.  Suppose that number is 73.  The choice is then made on the basis of:</p>
+<div class="codehilite"><pre><span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">]</span>
+<span class="n">codon</span> <span class="o">=</span> <span class="mi">73</span>
+<span class="n">choice_number</span> <span class="o">=</span> <span class="n">codon</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+<span class="n">choice</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">choice_number</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This results in a choice_number of 1, and the '-' option selected.</p>
+<p>That choice made, the next substitution will be made on the basis of the next
+number in the genotype sequence.  When all the numbers in the list have been
+drawn, then the genotype sequence can wrap around and start at the beginning.
+The program defaults to wrapping around.  If the end has been reached, yet more
+are needed, then the genotype will be marked as a failure and move on to the
+next.  The genotype can also be extended in lengh with the wrapped values as
+well. The rationale for this is that mutations in an extended genotype might be
+able to make minor changes in the extended genotype without affecting the
+earlier portions.  It is not totally clear that this arrangement is any better
+than simply starting out with a longer genotype.</p>
+<h3>Setting the Evolutionary Parameters</h3>
+<h4>Genotype Lengths</h4>
+<p>To review, the modules have been imported, and the BNF has been defined. Now
+the parameters for running the program need to be set.  Below, the
+GrammaticalEvolution class is substantiated, and an initial length is set at 20,
+extending up to 500.  This length, by the way, is the length of the decimal list
+of numbers.  The population size is set to 50, and the genotype will wrap if it
+hits the end of the genotype list. While mapping the genotype to the fitness
+program uses the decimal form of the genotype, crossovers and mutations are
+performed on the binary form.</p>
+<p>Also shown below is loading the BNF into the GrammaticalEvolution class.
+The load converts it to a dict form with each variable name as a key.</p>
+<div class="codehilite"><pre><span class="n">ges</span> <span class="o">=</span> <span class="n">GrammaticalEvolution</span><span class="p">()</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_bnf</span><span class="p">(</span><span class="n">bnf</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_genotype_length</span><span class="p">(</span><span class="n">start_gene_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                        <span class="n">max_gene_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_population_size</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_wrap</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Stopping Criteria</h4>
+<p>The next set of parameters control the course of the process. The
+<strong>set_max_generations</strong> function sets the maximum number of generations that will be run.
+If a fitness value is also set, the number of process will halt upon reaching the
+goal. If the goal is not reached, then it will stop at the maximum generations.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_max_generations</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_type</span><span class="p">(</span><span class="n">MIN</span><span class="p">,</span> <span class="o">.</span><span class="mo">01</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The fitness selection process for each generation in this case is to
+minimize the difference between the generated number and the cube of the
+number.  In other words, the closer the fitness value is to zero, the
+more fit that it is likely to be.  Fitness types have a choice of 'max',
+'min', 'center'. Given that we want to hit zero, the fitness_type in this
+case is 'center', and if a fitness value gets below .01, then that is deemed
+close enough.</p>
+<h4>Genotype Failures</h4>
+<p>Declaring failure is an important part of this process.  Failure declaration
+can occur for a number of reasons:</p>
+<ul>
+<li>The program generated grows to greater than 500 characters</li>
+<li>The program generated is syntactically incorrect</li>
+<li>It takes more than 10 seconds to generate the program.</li>
+<li>It takes more than 120 seconds to run the program.</li>
+<li>Some program fault such as dividing by zero.</li>
+</ul>
+<p>When failure has occurred, the fitness value is set to the fitness_fail
+value. Since every problem can be a little different, in this case the fail
+value is set 100.0, since we want something close to zero.  That way, the
+likelihood of replacement of that genotype is drastically increased.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_max_program_length</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_timeouts</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_fail</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Fitness Selections</h4>
+<p>The selection process for fitness should emphasize selecting successful
+genotypes and replacing less successful versions.  However, success being a
+relative thing, including some less successful versions in a later generation
+might well lead through crossovers and mutations to a much more successful
+genotype.  In this program, up to 50% are being replaced.  We are using two
+types of fitness selection, FitnessElites, and FitnessTournament.  FitnessElites
+takes the top 5% in this case and puts them in the list for reproduction and
+mutation. Then, a tournament process is used, where randomly, a pair of
+genotypes are drawn with replacement and the best genotype is added to the list.
+ This continues until the fitness quota is met, 50% in this case.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_selections</span><span class="p">(</span>
+    <span class="n">FitnessElites</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="o">.</span><span class="mo">05</span><span class="p">),</span>
+    <span class="n">FitnessTournament</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="n">tournament_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_fitness_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Once the fitness selection has been made, genotypes are modified by both the
+crossover operator and the mutation operator.  Both operators act on the binary
+version of the genotype.  Crossovers are performed on 20% in this case.
+Crossovers take place by selecting pairs, swapping from a single point parts of
+binary genotypes. A choice can be made for the number of children, either one or
+two. If one is selected, that one of the two crossed is selected randomly.  In
+this case we are using two.</p>
+<p>The mutation operator can act in one of two ways.  It can select a genotype
+for mutation at the mutation probability rate.  If mutated, it changes one bit
+in the genotype.  This is a mutation type of 's' for single.  Or, each genotype
+in the fitness selection list can be mutated at the probabilistic mutation rate
+on a bit by bit basis.  This mutation type is 'm' for multiple, since a
+particular genotype is at risk to be modified multiple times, depending upon the
+mutation rate.  In this case, 'multiple' has been selected and the mutation rate
+is 2.5%</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_mutation_rate</span><span class="p">(</span><span class="o">.</span><span class="mo">025</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_fitness_selections</span><span class="p">(</span>
+    <span class="n">FitnessElites</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="o">.</span><span class="mo">05</span><span class="p">),</span>
+    <span class="n">FitnessTournament</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="n">tournament_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_fitness_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">ges</span><span class="o">.</span><span class="n">set_crossover_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_children_per_crossover</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_mutation_type</span><span class="p">(</span><span class="s">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">ges</span><span class="o">.</span><span class="n">set_max_fitness_rate</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Replacements</h4>
+<p>The replacement process is very similar to the fitness selection, although in
+reverse.  In this case, ReplacementTournament is used where a tournament is
+conducted with 3 participants, and the worst is replaced. Replacements continue
+until all of the genotypes on the fitness selection list have been replaced.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_replacement_selections</span><span class="p">(</span>
+        <span class="n">ReplacementTournament</span><span class="p">(</span><span class="n">ges</span><span class="o">.</span><span class="n">fitness_list</span><span class="p">,</span> <span class="n">tournament_size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+
+<h4>Other</h4>
+<p>A history of fitness lists can be maintained through a run.  Seeing the
+history of fitness values per generation can give much insight into other ways
+to evaluate the problem.  Summary values from each list are available as well,
+such as mean, median, best_value, worst_value, and standard deviations.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">set_maintain_history</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img src="static/images/tutorial_ge1.png" style="float: right;" alt="chart historical fitness values"/></p>
+<h3>Run</h3>
+<p>With all the parameters set, the only thing left to do is create the genotypes and run.</p>
+<div class="codehilite"><pre><span class="n">ges</span><span class="o">.</span><span class="n">create_genotypes</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">ges</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>Results</h3>
+<p>On a sample run the best genotype member was 30.  The fitness_list structure
+is in the format:</p>
+<div class="codehilite"><pre><span class="p">[[</span><span class="n">fitness</span> <span class="n">value</span><span class="p">,</span> <span class="n">member</span> <span class="n">number1</span><span class="p">],</span>
+<span class="p">[[</span><span class="n">fitness</span> <span class="n">value</span><span class="p">,</span> <span class="n">member</span> <span class="n">number2</span><span class="p">]]</span>
+</pre></div>
+
+
+<p>The following is ges.fitness_list printed in
+raw form, sorted by best value</p>
+<div class="codehilite"><pre><span class="p">[[</span><span class="mf">8.6717539074000001e-16</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>  <span class="c1"># This one hit the mark</span>
+<span class="p">[</span><span class="mf">2.7773611289</span><span class="p">,</span> <span class="mi">24</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>        <span class="c1"># These get progressively worse</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">34</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">6.8311913649699996</span><span class="p">,</span> <span class="mi">41</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">7.2573146880300001</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">7.8597593677799997</span><span class="p">,</span> <span class="mi">42</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">7.8597593677799997</span><span class="p">,</span> <span class="mi">47</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">27</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">33</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">36</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">8.3324999999999996</span><span class="p">,</span> <span class="mi">48</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">10.3730644307</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">14.7910856822</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">15.7354593807</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">23.036235317300001</span><span class="p">,</span> <span class="mi">46</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>                     <span class="c1"># Program length too long or</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>                     <span class="c1"># invalid for some other reason</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">26</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">38</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">39</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">49</span><span class="p">],</span>
+<span class="p">[</span><span class="mf">1754878323.3599999</span><span class="p">,</span> <span class="mi">20</span><span class="p">]]</span>       <span class="c1"># Legal program, really bad values</span>
+</pre></div>
+
+
+<p>The generated program is:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">fitness</span> <span class="o">=</span> <span class="n">total</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">set_bnf_variable</span><span class="p">(</span><span class="s">&#39;&lt;fitness&gt;&#39;</span><span class="p">,</span> <span class="n">fitness</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

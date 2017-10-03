@@ -1,0 +1,36 @@
+Metadata-Version: 1.1
+Name: pyneurgen
+Version: 0.3.1
+Summary: Python Neural Genetic Hybrids
+Home-page: http://pyneurgen/sourceforge.net
+Author: Don Smiley
+Author-email: ds@sidorof.com
+License: GPL
+Description: 
+            This package provides the Python "pyneurgen" module, which contains several
+            classes for implementing grammatical evolution, a form of genetic
+            programming, and classes for neural networks.  These classes enable the
+            creation of hybrid models that can embody the strengths of grammatical
+            evolution and neural networks.
+        
+            While neural networks can be adept at solving non-linear problems, some
+            problems remain beyond reach.  For example, a difficult search space can
+            cause suboptimal solutions to be reached.  Also, multiobjective problems
+            become extremely difficult, if not impossible.  With genetic algorithms, a
+            more thorough search can be made.
+Keywords: grammatical evolution programming neural networks genetic algorithms
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Adaptive Technologies
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

@@ -1,0 +1,14 @@
+To Do
+=====================================
+Immediate / Near Future
+
+Samples:
+    More samples would be helpful to express different applications of the
+    modules.  Also, additional samples could highlight various features
+    currently available.
+
+Testing:
+    Unit tests is much more complete than it was (90%?), but more can be done.
+
+Flesh out logging 
+

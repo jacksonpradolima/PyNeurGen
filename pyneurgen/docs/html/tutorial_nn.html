@@ -1,0 +1,263 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_nn.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./recurrent.html">Network Taxonomy</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Neural Network Tutorial:</h2>
+<h3>Installation</h3>
+<p>The quickest way to install is with easy_install.  Since this is a Python library,
+at the Python prompt put:</p>
+<div class="codehilite"><pre><span class="n">easy_install</span> <span class="n">pyneurgen</span>
+</pre></div>
+
+
+<p>This section will go through an example to get acquainted with the
+software. To illustrate what is happening here, we will also use a separate
+Python software package called matplotlib.  If you are not already acquainted
+with the package, you will find that it is very helpful for 2d plotting and well
+worth adding to your system. It can be gotten at
+<a href="http://matplotlib.sourceforge.net">http://matplotlib.sourceforge.net</a>
+<img class="rightimg" src="./static/images/nn_population.png" style="float:
+     right;" alt="Chart showing the modified sine wave" /></p>
+<p>We will start with a simple neural network that calculates a sine
+related function with a slight random component to make it slightly more
+interesting:</p>
+<p>The first step is import the modules, and initialize the data.</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">plot</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">subplot</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">title</span>
+
+<span class="kn">from</span> <span class="nn">pyneurgen.neuralnet</span> <span class="kn">import</span> <span class="n">NeuralNet</span>
+<span class="kn">from</span> <span class="nn">pyneurgen.nodes</span> <span class="kn">import</span> <span class="n">BiasNode</span><span class="p">,</span> <span class="n">Connection</span>
+</pre></div>
+
+
+<h3>Inputs and Targets</h3>
+<p>Now, we will set up inputs and targets.  The following code just creates a
+list of inputs and targets.  The random component is added as an input to make
+the overall result a little more interesting or challenging.  The network must
+learn to ignore the random input and will just have to live with trying to
+understand the random component in the target data.  One important thing to
+remember is that the input should be normalized so that it is in the vicinity of
+-1 to +1.  That helps to avoid overflow issues related to weights trying to
+adjust for errors. This package does not normalize data automatically, because
+it should be done individually for each project.  For example, if timeseries
+data was normalized automatically, it might have a different starting point
+between testing and putting the neural network into production.  The chart at
+the right shows the data that is created.</p>
+<p>The population is built and then sorted randomly.  The data is placed
+into the inputs and targets for the neural net.  The last 20% of the data
+will be used for testing.</p>
+<div class="codehilite"><pre><span class="c">#   all samples are drawn from this population</span>
+<span class="n">pop_len</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">pop_len</span><span class="p">)</span>
+<span class="n">population</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">*</span> <span class="mf">10.0</span><span class="p">)</span> <span class="o">+</span> \
+                <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">)]</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pop_len</span><span class="p">)]</span>
+
+<span class="n">all_inputs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_targets</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">population_gen</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function shuffles the values of the population and yields the</span>
+<span class="sd">    items in a random fashion.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pop_sort</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">population</span><span class="p">]</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">pop_sort</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pop_sort</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">item</span>
+
+<span class="c">#   Build the inputs</span>
+<span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">population_gen</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="n">all_inputs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">pos</span> <span class="o">*</span> <span class="n">factor</span><span class="p">])</span>
+    <span class="n">all_targets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">target</span><span class="p">])</span>
+</pre></div>
+
+
+<p><img src="./static/images/tutorial_nn1c.png" style="float:
+right;" alt="chart showing the network structure"/></p>
+<h3>Network Structure</h3>
+<p>After importing and instantiating the main class <strong>NeuralNet</strong>
+called <strong>net</strong>. Then, it specifies a network structure of 2 inputs,
+1 hidden layer of 10 nodes, and finally, 1 output.  Note that this hidden
+layer is a list and can contain any number of hidden layers, although more than
+two hidden layers would be unusual.</p>
+<p>The default values initiate a network structure with a set of network nodes.
+Each node is fully connected to the layer below. In addition, the learn rate is
+set to .20.  That means that 20% of the error between each instance of target
+and output will be communicated back down the network during training.  The next
+step in the process is to randomize the weights of each connection. Without
+starting random values, the process of search is not able to differentiate one
+set of nodes from another.</p>
+<div class="codehilite"><pre><span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">init_layers</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">randomize_network</span><span class="p">()</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_halt_on_extremes</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c">#   Set to constrain beginning weights to -.5 to .5</span>
+<span class="c">#       Just to show we can</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_random_constraint</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_learnrate</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now that the network structure is created, the inputs and targets are
+loaded into the system.</p>
+<div class="codehilite"><pre><span class="n">net</span><span class="o">.</span><span class="n">set_all_inputs</span><span class="p">(</span><span class="n">all_inputs</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_all_targets</span><span class="p">(</span><span class="n">all_targets</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The first 80% of the data will be used for learning and the rest will be
+set aside for testing.  We will skip validation testing for these purposes.
+The <strong>net</strong> object is notified of that in the following:</p>
+<div class="codehilite"><pre><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_inputs</span><span class="p">)</span>
+<span class="n">learn_end_point</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="o">.</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">set_learn_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">learn_end_point</span><span class="p">)</span>
+<span class="n">net</span><span class="o">.</span><span class="n">set_test_range</span><span class="p">(</span><span class="n">learn_end_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The activation types for a network default to 'linear' for the input
+layer, 'sigmoid' for the hidden layers, and 'linear' for the output.  For
+this example, the hidden layer will be set to 'tanh'.  Layers are organized in
+a list with the input layer as 0, hidden layers 1 and above, ending in the
+output layer as the last.</p>
+<div class="codehilite"><pre><span class="n">net</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_activation_type</span><span class="p">(</span><span class="s">&#39;tanh&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>At this point we have the data loaded, the network structure
+defined and ready. We can now start the network learn process which sets the
+appropriate weights for each connection.  This process will be run in this
+case with 10 trips through the data.  Each trip is called an epoch.  There
+is also an option of loading in the data in a random fashion.</p>
+<div class="codehilite"><pre><span class="n">net</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span> <span class="n">show_epoch_results</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">random_testing</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>With learning complete, it is time to test and evaluate the results.</p>
+<div class="codehilite"><pre><span class="n">mse</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+
+
+<p>To view the results we will use some matplotlib charts.  The first chart
+compares the test versus actual for the 20% that was tested.  You can see that
+the general shape of the population shows in the sample.  In addition, the
+actual values are mostly representative of the target values.  Because of the
+random component of the population data, there is no expectation that it would
+exactly match.</p>
+<p>The second chart shows the mean squared errors for each epoch.
+Ideally, the progress of reducing error should be steadily downwards.</p>
+<p><img src="./static/images/nn_target_actuals.png" alt="chart
+     showing target values vs actuals"/></p>
+<p><img src="./static/images/nn_mse_epochs.png" alt="chart
+     showing mean squared errors by epoch"/></p>
+<p>Below, is the code used to generate the charts:</p>
+<div class="codehilite"><pre><span class="n">test_positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1000.0</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">get_test_data</span><span class="p">()]</span>
+
+<span class="n">all_targets1</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">test_targets_activations</span><span class="p">]</span>
+<span class="n">allactuals</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">test_targets_activations</span><span class="p">]</span>
+
+<span class="c">#   This is quick and dirty, but it will show the results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">population</span><span class="p">])</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&quot;Population&quot;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">test_positions</span><span class="p">,</span> <span class="n">all_targets1</span><span class="p">,</span> <span class="s">&#39;bo&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;targets&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">test_positions</span><span class="p">,</span> <span class="n">allactuals</span><span class="p">,</span> <span class="s">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;actuals&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&quot;Test Target Points vs Actual Points&quot;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">accum_mse</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">net</span><span class="o">.</span><span class="n">accum_mse</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;epochs&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;mean squared error&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&quot;Mean Squared Error by Epoch&quot;</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

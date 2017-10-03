@@ -1,0 +1,320 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_ge.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./fitness_functions.html">Fitness Functions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./ge_suggestions.html">Suggestions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="./"><img class="logo" src="./static/images/neuron-heading.png" alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h2>Fitness and Selection Techniques</h2>
+<p>This section discusses fitness selection and Replacement techniques that are
+available with the package.  In addition, there are example selections for each
+type.</p>
+<p>Fitness selection can take a number of forms.  This is a description of the
+selection strategies used in the package for both selection of the fittest, and
+replacement of the weakest.</p>
+<p>Selection strategies can be combined to get the best mix of surviving members and
+new recruits.</p>
+<h3>Fitness List</h3>
+<p>The fitness list is the class which holds the fitness values for a
+generation.  It is a subclassed list with additional statistics tacked on.</p>
+<p>The following is an example of a typical fitness list.  The format is:</p>
+<div class="codehilite"><pre><span class="p">[</span><span class="n">fitness_value</span><span class="p">,</span> <span class="n">member_no</span><span class="p">]</span>
+</pre></div>
+
+
+<p>where member_no is the index position within the list.</p>
+<div class="codehilite"><pre><span class="n">Example</span> <span class="n">of</span> <span class="n">a</span> <span class="n">Fitness</span> <span class="n">List</span> <span class="nb">sorted</span> <span class="n">by</span> <span class="n">fitness</span> <span class="n">value</span><span class="p">:</span>
+<span class="o">=================================================</span>
+<span class="p">[</span><span class="mf">0.02689267374143145</span><span class="p">,</span>  <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.034262795979475125</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.14574760894032901</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.29515808870127069</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.33073484487074634</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.34466928410553321</span><span class="p">,</span>  <span class="mi">8</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.38313755184891773</span><span class="p">,</span>  <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.38960229772992716</span><span class="p">,</span>  <span class="mi">9</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.44736210658328246</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.49378372171131801</span><span class="p">,</span>  <span class="mi">7</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.51691822222144257</span><span class="p">,</span>  <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.84866669583470145</span><span class="p">,</span>  <span class="mi">6</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.89358906741444621</span><span class="p">,</span>  <span class="mi">5</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.95832596214321464</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.98303101435534523</span><span class="p">,</span>  <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>A fitness list is instantiated with the fitness type, and optionally a target
+value. The type refers to the objective of the evolutionary process, such as
+generating the largest fitness value possible.  Accepted fitness types are
+'min', 'max', or 'center'. While a target value is required for a 'center'
+type, it is optional for 'min', and 'max'.</p>
+<p>An example of a 'center' based fitness list could have a target value of 0.01, which
+would mean that the process would continue until the abs(fitness value) is less
+or equal than 0.01.</p>
+<p>To help evaluate the fitness space, additional statistical functions are part
+of the FitnessList object:</p>
+<ul>
+<li>Statistics:  mean, median, standard deviation</li>
+<li>Min/Max values:  min_value, max_value</li>
+<li>Min/Max members: min_member, max_member</li>
+<li>Superlative values: best_value, worst_value</li>
+<li>Superlative members:  best_member, worst_member</li>
+</ul>
+<h3>Selections</h3>
+<p>Selections are made by either taking simply the top or bottom percentage, a
+simulated roulette wheel from a biased probability list, or a tournament where a
+small selection is taken from the fitness list and the best member is
+selected.</p>
+<h4>Elitism</h4>
+<p>This process selects on the basis of the best or the worst.  Usually, it is a
+fixed percentage.  When used exclusively, it has a tendency to become mired
+in less capable genotypes because of an inadequate search of the solution space.
+It often is combined with other selection strategies.</p>
+<h4>Roulette</h4>
+<p>In gambling a roulette wheel contains a series of numbers on the wheel, and
+while spinning a marble eventually comes to rest on one of those numbers making
+the selection.  In the processes here, there is a similar process.  However,
+what is different is that while the gambling roulette wheel is hopefully
+unbiased, the fitness selection roulette wheels bias the selection towards more
+fit values and away from less fit values.  It is as if some numbers on the
+roulette wheel are wider on more fit values and narrower on less fit values.
+There are various strategies that govern the widths that are derived, but all
+roulette selection strategies use a probabilistic list that totals 1.0.</p>
+<p>The benefit of using such a strategy is that while a selection process is likely
+to select a number of desirable genotypes, selecting less desirable genotypes may
+well crossover or mutate to become much more succesful genotypes than any of
+the current genotypes.  Genetic diversity helps to avoid becoming trapped in
+a local minima of the search space.</p>
+<h4>Tournaments</h4>
+<p>Tournaments represent another approach to ensuring a level of genetic
+diversity.  A tournament is a contest in which a small number of members are
+drawn from the population and the most fit member of the group is selected.
+Because the selection process is random, diversity is likely, but because the
+most fit is selected, a bias towards more fit is likely as well.</p>
+<p>The following presents a description of the fitness selection types and
+typical results that would be obtained using the fitness list given above.</p>
+<h3>Fitness Classes</h3>
+<h4>FitnessProportionate Class</h4>
+<p>The FitnessProportionate class selects by a roulette process where the
+probability list is shaped and scaled by the actual fitness values.  There are
+several types:</p>
+<ul>
+<li>linear: Scales all the values into a probability list according to
+relative size.</li>
+<li>truncation: Scales all the values over a hurdle value into a probability
+list according to relative size.</li>
+<li>exponential: Scales all the values raised to a power into a probability
+list according to relative size.</li>
+<li>logarithmic: Scales all the log values into a probability list according to
+relative size.</li>
+</ul>
+<p>One thing worth noting is that proportionality is based upon the fitness
+value to the sum of the fitness values.  That implies that the sign of all the
+fitness values are the same.</p>
+<p>Typical results follow for each type of selection.  Fitness type refers to
+the objective of the evolutionary strategy.  The numbers below each
+description are the member numbers selected from the population.  By
+comparing the number selected with the fitness list above, you can see
+examples of the selection process at work.</p>
+<div class="codehilite"><pre><span class="n">Scaling</span> <span class="n">Type:linear</span>         <span class="n">Fitness</span> <span class="n">Type:max</span>
+<span class="mi">1</span> <span class="mi">13</span> <span class="mi">12</span> <span class="mi">11</span> <span class="mi">0</span> <span class="mi">6</span> <span class="mi">13</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">12</span> <span class="mi">6</span> <span class="mi">9</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">11</span>
+
+<span class="n">Scaling</span> <span class="n">Type:linear</span>         <span class="n">Fitness</span> <span class="n">Type:min</span>
+<span class="mi">2</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">4</span>
+
+<span class="n">Scaling</span> <span class="n">Type:linear</span>         <span class="n">Fitness</span> <span class="n">Type:center</span>
+<span class="mi">11</span> <span class="mi">12</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">5</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">8</span> <span class="mi">14</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">8</span> <span class="mi">6</span> <span class="mi">8</span>
+
+<span class="n">Scaling</span> <span class="n">Type:exponential</span>    <span class="n">Fitness</span> <span class="n">Type:max</span>
+<span class="mi">5</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">12</span> <span class="mi">11</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">9</span> <span class="mi">6</span>
+
+<span class="n">Scaling</span> <span class="n">Type:exponential</span>    <span class="n">Fitness</span> <span class="n">Type:min</span>
+<span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span>
+
+<span class="n">Scaling</span> <span class="n">Type:exponential</span>    <span class="n">Fitness</span> <span class="n">Type:center</span>
+<span class="mi">6</span> <span class="mi">7</span> <span class="mi">0</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">5</span> <span class="mi">13</span> <span class="mi">3</span> <span class="mi">12</span> <span class="mi">2</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">1</span>
+
+<span class="n">Scaling</span> <span class="n">Type:truncation</span>     <span class="n">Fitness</span> <span class="n">Type:max</span>     <span class="n">Truncation</span> <span class="n">Value:0</span><span class="mf">.25</span>
+<span class="mi">5</span> <span class="mi">5</span> <span class="mi">8</span> <span class="mi">6</span> <span class="mi">11</span> <span class="mi">7</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">13</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">7</span>
+
+<span class="n">Scaling</span> <span class="n">Type:truncation</span>     <span class="n">Fitness</span> <span class="n">Type:min</span>     <span class="n">Truncation</span> <span class="n">Value:0</span><span class="mf">.25</span>
+<span class="mi">14</span> <span class="mi">5</span> <span class="mi">13</span> <span class="mi">6</span> <span class="mi">12</span> <span class="mi">9</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">14</span> <span class="mi">3</span> <span class="mi">8</span> <span class="mi">11</span> <span class="mi">13</span> <span class="mi">11</span> <span class="mi">14</span>
+
+<span class="n">Scaling</span> <span class="n">Type:truncation</span>     <span class="n">Fitness</span> <span class="n">Type:center</span>  <span class="n">Truncation</span> <span class="n">Value:0</span><span class="mf">.25</span>
+<span class="mi">11</span> <span class="mi">13</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">7</span> <span class="mi">14</span> <span class="mi">11</span> <span class="mi">3</span> <span class="mi">7</span> <span class="mi">13</span> <span class="mi">9</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">8</span> <span class="mi">9</span>
+</pre></div>
+
+
+<h4>FitnessTournament Class</h4>
+<p>The FitnessTournament class implements a tournament for fitness as described
+above.  The tournament size is adjustable.  The larger the tournament size, the
+more likely that high fitness members are to be included.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">7</span> <span class="mi">14</span> <span class="mi">6</span> <span class="mi">11</span> <span class="mi">6</span> <span class="mi">13</span> <span class="mi">7</span> <span class="mi">3</span> <span class="mi">12</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">9</span> <span class="mi">8</span> <span class="mi">13</span> <span class="mi">8</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">0</span> <span class="mi">8</span> <span class="mi">14</span> <span class="mi">13</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">11</span> <span class="mi">14</span> <span class="mi">4</span> <span class="mi">14</span> <span class="mi">4</span> <span class="mi">8</span> <span class="mi">2</span> <span class="mi">7</span> <span class="mi">4</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">1</span> <span class="mi">6</span> <span class="mi">12</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">12</span>
+</pre></div>
+
+
+<h4>FitnessElites Class</h4>
+<p>The FitnessElites class implements a selection strategy that takes the top
+percentage of the population, ensuring that the best of a generation can be
+continued to the next generation.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Elite</span> <span class="n">Rate:</span> <span class="mf">0.3</span>
+<span class="mi">1</span> <span class="mi">12</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">0</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Elite</span> <span class="n">Rate:</span> <span class="mf">0.3</span>
+<span class="mi">2</span> <span class="mi">4</span> <span class="mi">10</span> <span class="mi">13</span> <span class="mi">14</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Elite</span> <span class="n">Rate:</span> <span class="mf">0.3</span>
+<span class="mi">6</span> <span class="mi">5</span> <span class="mi">12</span> <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+
+
+<h4>FitnessLinearRanking Class</h4>
+<p>This class selects fitness on the basis of rank with other members.  Only the
+position in the ranking matters rather than the fitness value.  The probability
+curve is calculated on that basis, then roulette selection takes place.</p>
+<p>This uses the formula for the probability curve of:</p>
+<div class="codehilite"><pre><span class="n">worstfactor</span><span class="p">:</span>  <span class="n">w</span>
+<span class="n">bestfactor</span><span class="p">:</span>   <span class="n">b</span>
+<span class="n">population</span><span class="p">:</span>   <span class="n">p</span>
+
+<span class="n">Probability</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">rank</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+
+<p>When b + w = 2 and 1 &lt;= worstfactor &lt;= 2, the best individual produces up
+to twice the number of children as the average.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Linear</span> <span class="n">Ranking:</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">11</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">7</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Linear</span> <span class="n">Ranking:</span>
+<span class="mi">4</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">12</span> <span class="mi">1</span> <span class="mi">8</span> <span class="mi">4</span> <span class="mi">10</span> <span class="mi">8</span> <span class="mi">11</span> <span class="mi">2</span> <span class="mi">11</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mi">4</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Linear</span> <span class="n">Ranking:</span>
+<span class="mi">3</span> <span class="mi">12</span> <span class="mi">10</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">6</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
+</pre></div>
+
+
+<h4>FitnessTruncationRanking Class</h4>
+<p>This class selects fitness on the basis of rank with other members if above a
+certain rank.  Once above that rank, any member can be selected with an equal
+probability.  The truncation value is entered as a rate and converted to a
+ranking value. For example, if a population has 100 members and a truncation
+value of .2, the truncated ranking will be converted to a rank of 20.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Truncation</span> <span class="n">rate:</span> <span class="mf">0.2</span>
+<span class="mi">10</span> <span class="mi">10</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">10</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">4</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Truncation</span> <span class="n">rate:</span> <span class="mf">0.2</span>
+<span class="mi">5</span> <span class="mi">5</span> <span class="mi">12</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">12</span> <span class="mi">12</span> <span class="mi">5</span> <span class="mi">12</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">12</span> <span class="mi">1</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Truncation</span> <span class="n">rate:</span> <span class="mf">0.2</span>
+<span class="mi">2</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">4</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">4</span>
+</pre></div>
+
+
+<h3>Replacement Classes</h3>
+<h4>ReplacementDeleteWorst Class</h4>
+<p>The ReplacementDeleteWorst class acts just as the FitnessElite class,
+except in reverse, culling a percentage of the weakest members.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Replacement</span> <span class="n">Count:</span> <span class="mi">3</span>
+<span class="mi">2</span> <span class="mi">4</span> <span class="mi">10</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Replacement</span> <span class="n">Count:</span> <span class="mi">3</span>
+<span class="mi">1</span> <span class="mi">12</span> <span class="mi">5</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Replacement</span> <span class="n">Count:</span> <span class="mi">3</span>
+<span class="mi">2</span> <span class="mi">4</span> <span class="mi">10</span>
+</pre></div>
+
+
+<h4>ReplacementTournament Class</h4>
+<p>The ReplacementTournament class selects on the basis of a tournament, culling
+the weakest members.</p>
+<div class="codehilite"><pre><span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">max</span>        <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">14</span> <span class="mi">3</span> <span class="mi">13</span> <span class="mi">14</span> <span class="mi">14</span> <span class="mi">7</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">11</span> <span class="mi">8</span> <span class="mi">13</span> <span class="mi">13</span> <span class="mi">2</span> <span class="mi">11</span> <span class="mi">4</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">min</span>        <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">0</span> <span class="mi">7</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">11</span> <span class="mi">5</span> <span class="mi">3</span> <span class="mi">12</span> <span class="mi">3</span> <span class="mi">9</span> <span class="mi">6</span>
+
+<span class="n">Fitness</span> <span class="n">Type:</span> <span class="n">center</span>     <span class="n">Tournament</span> <span class="n">Size:</span> <span class="mi">2</span>
+<span class="mi">7</span> <span class="mi">7</span> <span class="mi">4</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">13</span> <span class="mi">10</span> <span class="mi">10</span> <span class="mi">14</span> <span class="mi">2</span> <span class="mi">10</span> <span class="mi">13</span> <span class="mi">4</span> <span class="mi">4</span> <span class="mi">2</span>
+</pre></div>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

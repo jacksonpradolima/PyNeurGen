@@ -1,0 +1,445 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="../static/style.css">
+<link rel=stylesheet type=text/css href="../static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="../static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="../index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../neural_networks.html">Neural Networks</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../grammatical_evolution.html">Grammatical Evolution</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../tutorial_genn.html">Hybrids</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../api/index.html">API</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="../resources.html">Resources</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="share">
+
+</div>
+ <div id="head-container">
+    <div id=header>
+       <a href="/"><img class="logo" src="../static/images/neuron-heading.png" alt="logo"></a>
+        <a href="/">PyNeurGen</a>
+        <h2><a href="/">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+<div id=metanav>
+<h3>Modules:</h3>
+<ul>
+        
+            <li><a href="./">Neural Networks</a></li>
+        
+        
+
+        
+            <li><a href="./neuralnet_api.html">neuralnet</a></li>
+        
+        
+            <ul> 
+                <li><a href="./neuralnet_api.html#NeuralNet">NeuralNet</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./recurrent_api.html">recurrent</a></li>
+        
+        
+            <ul> 
+                <li><a href="./recurrent_api.html#RecurrentConfig">RecurrentConfig</a></li>
+            
+                <li><a href="./recurrent_api.html#RecurrentConfig">ElmanSimpleRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#JordanRecurrent">JordanRecurrent</a></li>
+            
+                <li><a href="./recurrent_api.html#NARXRecurrent">NARXRecurrent</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./layers_api.html">layers</a></li>
+        
+        
+            <ul> 
+                <li><a href="./layers_api.html#Layer">Layer</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./nodes_api.html">nodes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./nodes_api.html#ProtoNode">ProtoNode</a></li>
+            
+                <li><a href="./nodes_api.html#Node">Node</a></li>
+            
+                <li><a href="./nodes_api.html#CopyNode">CopyNode</a></li>
+            
+                <li><a href="./nodes_api.html#BiasNode">BiasNode</a></li>
+            
+                <li><a href="./nodes_api.html#Connection">Connection</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./">Genetic Algorithms</a></li>
+        
+        
+
+        
+            <li><a href="./grammatical_evolution_api.html">grammatical_evolution</a></li>
+        
+        
+            <ul> 
+                <li><a href="./grammatical_evolution_api.html#GrammaticalEvolution">GrammaticalEvolution</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./genotypes_api.html">genotypes</a></li>
+        
+        
+            <ul> 
+                <li><a href="./genotypes_api.html#Genotype">Genotype</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./fitness_api.html">fitness</a></li>
+        
+        
+            <ul> 
+                <li><a href="./fitness_api.html#FitnessList">FitnessList</a></li>
+            
+                <li><a href="./fitness_api.html#Selection">Selection</a></li>
+            
+                <li><a href="./fitness_api.html#Tournament">Tournament</a></li>
+            
+                <li><a href="./fitness_api.html#Fitness">Fitness</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessProportionate">FitnessProportionate</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTournament">FitnessTournament</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessElites">FitnessElites</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessLinearRanking">FitnessLinearRanking</a></li>
+            
+                <li><a href="./fitness_api.html#FitnessTruncationRanking">FitnessTruncationRanking</a></li>
+            
+                <li><a href="./fitness_api.html#Replacement">Replacement</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementDeleteWorst">ReplacementDeleteWorst</a></li>
+            
+                <li><a href="./fitness_api.html#ReplacementTournament">ReplacementTournament</a></li>
+            </ul>
+        
+
+        
+            <li><a href="./utilities_api.html">utilities</a></li>
+        
+        
+</ul>
+</div>
+<div id="api"><h1>Fitness Module</h1>
+<p>This module implements the fitness components for grammatical evolution.</p>
+<h2><a name= "FitnessList">FitnessList Class</a></h2>
+<p>This class maintains a list of fitness values per generation.  It is a
+subclassed list to maintain information regarding whether fitness values
+should be maximized, minimized or centered around zero.  By holding that
+information, when the fitness list is given to a fitness evaluation or
+replacement object, it can configure itself automatically to conform to the
+appropropriate characteristics for the class.</p>
+<h3>def __init__(self, fitness_type, target_value=0.0):</h3>
+<p>This function initializes and accepts the fitness type.  Optionally it
+accepts the target value.  The target value is the value where
+execution of the evolutionary process halts upon attaining the goal.</p>
+<h3>def set_fitness_type(self, fitness_type):</h3>
+<p>This function sets the fitness type.</p>
+<p>Accepted fitness types are 'min', 'max', or 'center'.</p>
+<h3>def get_fitness_type(self):</h3>
+<p>This function returns the fitness type, such as 'min',
+'max', or 'center'.</p>
+<h3>def set_target_value(self, target_value):</h3>
+<p>This function sets the target value.</p>
+<h3>def get_target_value(self):</h3>
+<p>This function returns the target value.</p>
+<h3>def min_value(self):</h3>
+<p>This function returns the minimum value in the list.</p>
+<h3>def max_value(self):</h3>
+<p>This function returns the maximum value in the list.</p>
+<h3>def best_value(self):</h3>
+<p>This function returns the best value in the list on the basis of the
+objective of the fitness list. For example, when trying to maximize a
+fitness value, it would return the maximum value.</p>
+<h3>def worst_value(self):</h3>
+<p>This function returns the worst value in the list on the basis of the
+objective of the fitness list. For example, when trying to maximize a
+fitness value, it would return the minimum value.</p>
+<h3>def min_member(self):</h3>
+<p>This function returns the member with the minimum value.</p>
+<h3>def max_member(self):</h3>
+<p>This function returns the member with the maximum value.</p>
+<h3>def best_member(self):</h3>
+<p>This function returns the member with the best value based upon the
+criteria of the fitness type.</p>
+<h3>def worst_member(self):</h3>
+<p>This function returns the member with the worst value based upon the
+criteria of the fitness type.</p>
+<h3>def mean(self):</h3>
+<p>This function returns the mean fitness value.</p>
+<h3>def median(self):</h3>
+<p>This function returns the median fitness value.</p>
+<h3>def stddev(self):</h3>
+<p>This function returns the standard deviation of fitness values.</p>
+<h3>def sorted(self):</h3>
+<p>This function returns the fitness list sorted in fitness order
+according to the fitness type.</p>
+<h2><a name= "Selection">Selection Class</a></h2>
+<p>This is the base class for methods appropriate for assessing the fitness
+landscape.  _selection_type refers to the technique associated with the
+selection method that is subclassed.</p>
+<p>The selection_list used in this class is an ordinary list of values, not a
+fitness list, the fitness list being a list of tuples.</p>
+<p>It is the responsibility of the derived classes to adjust the selection
+list values as needed.</p>
+<h3>def __init__(self, selection_list=None):</h3>
+<h3>def set_selection_list(self, selection_list):</h3>
+<p>This function accepts the selection list.  This is the list of fitness
+values that may have been transformed for the selection process.</p>
+<h3>def set_selection_type(self, selection_type):</h3>
+<p>This function accepts the selection type, which must be either 'min'
+or 'max'.  The selection type is used by the subclass to know how to
+manipulate the list to achieve the fitness goals.</p>
+<h3>def _roulette_wheel(scale_list):</h3>
+<p>This function receives a list that has been scaled so that the sum
+total of the list is 1.0.  This enables a fair use of probability.
+This is a generator that yields a random selection from the list.</p>
+<h3>def _make_sort_list(self):</h3>
+<p>This function sorts the _selection list making it similar to the
+original fitness list, except the the fitness values have been
+adjusted.</p>
+<h2><a name= "Tournament">Tournament Class</a></h2>
+<p>Selects random tuples and returns either the minimum or maximum.  To speed
+up the rate of selection, use larger tournament sizes, and smaller to slow
+down the process.</p>
+<h3>def __init__(self, selection_list=None, tournament_size=None):</h3>
+<h3>def set_tournament_size(self, tournament_size):</h3>
+<p>This function accepts the tournament size, which is the number of
+members that will be selected per tournament.</p>
+<h3>def _set_minmax(self, minmax):</h3>
+<p>This function sets whether the selection should minimize or maximize.</p>
+<h3>def select(self):</h3>
+<p>The select function provides all the members based upon the class
+algorithm.</p>
+<h2><a name= "Fitness">Fitness Class</a></h2>
+<p>This class is the prototype for the fitness functions.  The primary job of
+a fitness function is to deal with the list of [fitness value, member no]
+pairs that are generated as a result of a run.</p>
+<p>It also scales and configures the fitness values to be consistent with the
+fitness functions characteristics. For example, if the fitness strategy is
+to minimize values and the Fitness selection strategy maximizes, then the
+fitness values will be converted to -value.  If the fitness strategy
+centers on a value, such as zero, then the values will be converted to the
+absolute distance from that value.</p>
+<h3>def __init__(self, fitness_list):</h3>
+<h3>def set_fitness_list(self, fitness_list):</h3>
+<p>This function accepts the fitness list.  It is the list of fitness
+values by member number for a population.</p>
+<h3>def _invert(value):</h3>
+<p>This method returns the reciprocal of the value.</p>
+<h3>def _scale_list(self):</h3>
+<p>This function scales the list to convert for example min to max where
+the selection type warrants it.</p>
+<h3>def _make_prob_list(selection_list):</h3>
+<p>This function aids in calculating probability lists. It
+scales the values to add up to 1.0.</p>
+<h2><a name= "FitnessProportionate">FitnessProportionate Class</a></h2>
+<p>The probability of selection is based upon the fitness value of the
+individual relative to the rest of the population.</p>
+<p>Pr(G_i) = f(G_i)/ sum(1 to pop) f(G_i)</p>
+<p>This is the total probability.  Roulette wheel selects individuals
+randomly, highest fitness more likely to be included.</p>
+<p>Note that inherent in this approach is the assumption that the fitness
+value should be as large as possible. Consequently, if the fitness type
+is MIN or CENTER, a modification is made.  In the case of MIN, inverse of
+the fitness values are used. For the CENTER fitness type, the inverse of
+the absolute difference between the target value and the fitness values are
+used.</p>
+<p>The available scaling methods are:</p>
+<ul>
+<li>SCALING_LINEAR = 'linear'</li>
+<li>SCALING_TRUNC = 'truncation'</li>
+<li>SCALING_EXPONENTIAL = 'exponential'</li>
+<li>SCALING_LOG = 'logarithmic'</li>
+</ul>
+<p>Truncation can be selected via
+ex: self.select(param=<your truncation value>).  Upon truncation,
+the fitness values are linearly scaled.</p>
+<p>The default value for exponential is 2.0, but that is adjustable via:
+ex: self.select(param=1.5)</p>
+<p>Also, note that because a probability map is derived from the scaled
+numbers, the fitness values must all be positive or all negative for this
+approach to be valid.  In addition, the logarithmic scaling also requires
+that the fitness values must be 1 or above, prior to scaling.  This is
+because the log below 1 is a negative number, which then interferes with
+the calculation of the probabilities.</p>
+<h3>def __init__(self, fitness_list, scaling_type):</h3>
+<h3>def set_scaling_type(self, scaling_type):</h3>
+<p>This function accepts the type of scaling that will be performed on
+the data in preparation of building a probability list for the roulette
+selection.</p>
+<h3>def _check_minmax(self):</h3>
+<p>If selection of fitness is with proportions, then they must all be the
+same sign.  Also, negative numbers do not mix with logs.</p>
+<h3>def select(self, param=None):</h3>
+<p>The select function provides all the members based upon the class
+algorithm.</p>
+<h3>def _apply_prop_scaling(self, param):</h3>
+<p>This function scales the values according to the scale type.</p>
+<h2><a name= "FitnessTournament">FitnessTournament Class</a></h2>
+<p>This class selects the fitness based on a tournament. It defaults to a
+tournament size of 2, but it can be anything up to the size of the
+population.</p>
+<h3>def __init__(self, fitness_list, tournament_size=2):</h3>
+<h2><a name= "FitnessElites">FitnessElites Class</a></h2>
+<p>This class selects the highest or lowest fitness depending upon what is
+desired.  The fitness list is put into the selection list in this case so
+that once the sorting for rank takes place, the member numbers are still
+available.</p>
+<h3>def __init__(self, fitness_list, rate):</h3>
+<h3>def set_rate(self, rate):</h3>
+<p>This function accepts a value greater than 0 and less than or equal to
+1.0.  It is the percentage of members from a list sorted by best
+values.</p>
+<h3>def select(self):</h3>
+<p>The select function provides all the members based upon the class
+algorithm.</p>
+<h2><a name= "FitnessLinearRanking">FitnessLinearRanking Class</a></h2>
+<p>This class selects fitness on the basis of rank with other members.  Only
+the position in the ranking matters rather than the fitness value.  The
+probability curve is calculated on that basis. Then, roulette selection
+takes place.</p>
+<p>This uses the formula for the probability curve of:
+Probability = 1 / population * (worstfactor + (best -
+worstfactor) * (rank(Member) - 1) / (population - 1))</p>
+<p>where best = 2.0 - worstfactor</p>
+<p>the best individual produces up to twice the children as the average.</p>
+<p>To make sense of this:
+Suppose that the worst factor is .6 and therefor the best factor is
+1.4.  That will generate a probability list where the most fit members
+will be weighted more highly than less fit members.</p>
+<p>If the worst factor is 1.0 and therefore the best factor is 1.0 too,
+the slope of the probability line will flat.</p>
+<p>And finally, if the worst factor is 1.6 and the best factor is .4, the
+slope of the probaility line will cause the less fit members to have a
+higher probability of being selected than the more fit members.</p>
+<h3>def __init__(self, fitness_list, worstfactor):</h3>
+<h3>def set_worstfactor(self, worstfactor):</h3>
+<p>This function sets the worst factor.  See the class description for
+more.</p>
+<h3>def select(self):</h3>
+<p>The select function provides all the members based upon the class
+algorithm.</p>
+<h3>def _linear_ranking(count, worst):</h3>
+<p>This applies the best and worst factors and assigns the selection
+probability to each rank.</p>
+<p>This returns a list of those probabilities.</p>
+<h2><a name= "FitnessTruncationRanking">FitnessTruncationRanking Class</a></h2>
+<p>This class selects fitness on the basis of rank with other members if
+above a certain rank.  Once above that rank, any member can be selected
+with an equal probability.  The truncation value is entered as a rate and
+converted to a ranking value. For example, if a population has 100 members
+and a truncation value of .2, the truncated ranking will be converted to a
+rank of 20.</p>
+<h3>def __init__(self, fitness_list, trunc_rate):</h3>
+<h3>def set_trunc_rate(self, trunc_rate):</h3>
+<p>This function sets the rate, between 0 and 1 that is a hurdle for
+selection.</p>
+<h3>def select(self):</h3>
+<p>The select function provides all the members based upon the class
+algorithm.</p>
+<h3>def _calc_prob(length, cutoff_rank):</h3>
+<p>This function calculates the probability that a member will be selected
+if it falls within the cutoff rank.</p>
+<h2><a name= "Replacement">Replacement Class</a></h2>
+<p>This is the base class for the classes that identify which members are to
+be replaced.  It is basically the same as a fitness class, but attempts to
+identify the worst, not the best.</p>
+<h3>def __init__(self, fitness_list):</h3>
+<h2><a name= "ReplacementDeleteWorst">ReplacementDeleteWorst Class</a></h2>
+<p>This class is the mirror image of FitnessElite.  The worst members are
+returned.</p>
+<h3>def __init__(self, fitness_list, replacement_count):</h3>
+<p>This function initializes Replacement and then adds a replacement
+count for handling the number of members that will be replaced each
+time.</p>
+<h3>def set_replacement_count(self, replacement_count):</h3>
+<p>This function accepts the number of members to be replaced.</p>
+<h3>def select(self):</h3>
+<p>select is a generator that yields the members for
+replacement sorted from worst to best. It halts when the replacemnt
+count has been reached.</p>
+<h2><a name= "ReplacementTournament">ReplacementTournament Class</a></h2>
+<p>This class selects the fitness based on a tournament.</p>
+<h3>def __init__(self, fitness_list, tournament_size):</h3>
+<p>This class combines Replacement and Tournament.  It inits Replacement
+first, because both have a select function and the Tournament select
+function is the one that matters.</p></div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>

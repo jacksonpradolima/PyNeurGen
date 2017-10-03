@@ -1,0 +1,126 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PyNeurGen</title>
+<link rel=stylesheet type=text/css href="./static/style.css">
+<link rel=stylesheet type=text/css href="./static/codehilite.css">
+<link rel="shortcut icon" type="image/png" href="./static/images/neuron-heading.png">
+<meta name="AUTHOR" content="Don Smiley" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="KEYWORDS" content="neural network, genetic algorithms, python grammatical evolution genetic programming"/>
+<meta itemprop="name" content="PyNeurGen">
+<meta itemprop="description" content="Python Neural Genetic Algorithm Hybrids">
+
+
+</head>
+<body>
+<div id="navigation-container">
+    <div id="navigation">
+        <ul>
+        
+            <li><a  class=menuitem href="./index.html">Home</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="http://sourceforge.net/projects/pyneurgen/files/">Downloads</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./tutorial_nn.html">Getting Started</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./recurrent.html">Network Taxonomy</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./nn_suggestions.html">Suggestions</a></li>
+            
+
+        
+        
+            <li><a  class=menuitem href="./api/index.html">API</a></li>
+            
+
+        </ul>
+    </div>
+</div>
+<div id="head-container">
+    <div id=header>
+<div id="share">
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f25c9f708c23486"></script>
+<!-- AddThis Button END -->
+
+</div>
+        <a href="./"><img class="logo" src="./static/images/neuron-heading.png"
+alt="logo"></a>
+        <a href="./">PyNeurGen</a>
+        <h2><a href="./">Python Neural Genetic Algorithm Hybrids</a></h2>
+    </div>
+</div>
+<div id="content-container">
+    <div id="content-container2">
+        <div id="content-container3">
+            
+
+<div id="content">
+<h1>Suggestions for using neural networks.</h1>
+<h2>Normalize Your Data</h2>
+<p>This can speed up the process of selecting connection weights.  One aspect that
+may not be obvious is that the normalization should done in a fashion that will
+be consistent with your future inputs; your data should be stationary. By
+maintaining that consistency, it will be more likely that your future results
+will be more consistent with the data you have used to create your model.</p>
+<p>So, for your data, if you normalize with respect to your minimums and maximums
+in your current data, but your future data could range further, it is best to
+select minimums and maximums that are beyond what you expect to reach.</p>
+<h2>Break Up Your Problem into Parts</h2>
+<p>If your results are not satisfactory, perhaps a subset of the problem will be
+more solvable.</p>
+<h2>Try Using More Hidden Layers (or Less)</h2>
+<p>Selecting the right number of nodes and layers is still art more than science,
+so expect to experiment with a number of possibilities.</p>
+<h2>Randomize the Order of Input</h2>
+<p>If you are not using recurrent networks, then each set of inputs is independent
+of the other inputs.  By randomizing the inputs, you might avoid subtle weight
+shifting of the connections that might lead you to local minimums rather than a
+global minimum.</p>
+<div class="codehilite"><pre><span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNet</span><span class="p">()</span>
+
+<span class="c">#   after setting up the rest...</span>
+<span class="n">net</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">show_epoch_results</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+       <span class="n">random_testing</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">show_sample_interval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>Train the Network Several Times</h2>
+<p>It is easy to get get stuck in a local minimum.  Sometimes that can be
+dependent on your starting values.  Restarting the training will reset the
+random connection weights perhaps resulting in a better result.</p>
+</div>
+
+
+        </div>
+    </div>
+    <div id="footer-container">
+    <div id="footer">
+        <p class="copy">&copy;Copyright 2012, Don Smiley. All rights reserved.</p>
+        <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=223791&amp;type=4" width="125" height="37" alt="SourceForge.net Logo" /></a>
+    </div>
+    </div>
+</div>
+</body>
