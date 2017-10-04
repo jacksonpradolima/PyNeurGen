@@ -39,7 +39,7 @@ or
 sudo pip install git+https://github.com/jacksonpradolima/pyneurgen.git@master
 ```
 
-# Author and license information
+# Author
 
 Copyright (C) 2012 Don Smiley <ds@sidorof.com>
 
