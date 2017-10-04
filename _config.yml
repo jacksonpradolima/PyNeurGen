@@ -83,8 +83,8 @@ collections:
 
 # Site menu settings
 menu:
-  - title: "Blog"
-    url: "/blog"
+  # - title: "Blog"
+  #   url: "/blog"
   - title: "Documentation"
     url: "/documentation"
   - title: "Support"
