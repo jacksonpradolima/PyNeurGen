@@ -2,6 +2,8 @@
 
 This is a fork of the PyNeurGen based on release 0.3.1. The original site is http://pyneurgen.sourceforge.net/ with the source code at https://sourceforge.net/projects/pyneurgen/
 
+**NOTE** The [owner](jacksonpradolima) of this repository has no affiliation with official PyNeurGen project. This repo is periodically updated as a kindness to others who have shown interest in it. Therefore, this exists to provide an easy way to access and contribute with the project, nothing more.
+
 # About
 
 This package provides the Python "pyneurgen" module, which contains several
