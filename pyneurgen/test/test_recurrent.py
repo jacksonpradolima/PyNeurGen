@@ -31,7 +31,7 @@ class RecurrentConfigTest(unittest.TestCase):
 
     def test__apply_config(self):
 
-        print 'test__apply_config not yet implemented'
+        print('test__apply_config not yet implemented')
 
     def test_fully_connect(self):
 

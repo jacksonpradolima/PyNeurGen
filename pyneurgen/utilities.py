@@ -25,7 +25,6 @@ This module implements some basic utilities for use with Grammatical Evolution
 
 from random import random
 
-
 def rand_weight(constraint=1.0):
     """
     Returns a random weight centered around 0.  The constrain limits
@@ -46,34 +45,21 @@ def base10tobase2(value, zfill=0):
     resulting in a string 1 char longer than the zfill specified.
 
     """
-    new_value = []
+
     val = int(value)
-    if val < 0:
-        neg = True
-        val *= -1
-    else:
-        neg = False
-
-    if val == 0:
-        new_value = ['0']
-
-    while val > 0:
-        new_value.append(str(val % 2))
-        val = val / 2
-
-    new_value.reverse()
-    new_value_str = ''.join(new_value)
+    new_value_str = bin(val).split('b')[1]
     if zfill:
-        if len(new_value_str) > zfill:
+        to_add = zfill - len(new_value_str)
+        if to_add < 0:
             raise ValueError("""
             Base 2 version of %s is longer, %s, than the zfill limit, %s
-            """ % (value, new_value_str, zfill))
+            """ % (value, new_value_str, zfill))            
         else:
-            new_value_str = new_value_str.zfill(zfill)
-
-    if neg:
-        new_value_str = "-" + new_value_str
-
+            new_value_str = '0' * to_add + new_value_str
+            
+    if val < 0:
+       new_value_str = "-" + new_value_str
+       
     return new_value_str
 
 
@@ -84,25 +70,12 @@ def base2tobase10(value):
 
     """
 
-    new_value = 0
     val = str(value)
-    if val < 0:
-        neg = True
-        val *= -1
+    if val[0] == '-':
+        val = val.replace('-', '-0b')
     else:
-        neg = False
+        val = '0b' + val
 
-    val = str(value)
-
-    factor = 0
-    for i in range(len(val) - 1, -1, -1):
-        if not val[i] == '-':
-            new_value += int(val[i]) * pow(2, factor)
-        else:
-            neg = True
-        factor += 1
-
-    if neg:
-        new_value *= -1
-
+    new_value = int(val, 2)
+    
     return new_value

@@ -184,11 +184,11 @@ for g in ges.population:
     g.all_inputs = all_inputs
     g.all_targets = all_targets
 
-print ges.run()
-print "Final Fitness list sorted best to worst:"
-print ges.fitness_list.sorted()
-print
-print
+print(ges.run())
+print("Final Fitness list sorted best to worst:")
+print(ges.fitness_list.sorted())
+print()
+print()
 g = ges.population[ges.fitness_list.best_member()]
 program = g.local_bnf['program']
 
@@ -205,11 +205,11 @@ test_start_point = int(pop_len * .8) + 1
 net.set_test_range(test_start_point, pop_len - 1)
 mse = net.test()
 
-print "The selected model has the following characteristics"
-print "Activation Type:", net.layers[1].nodes[1].get_activation_type()
-print "Hidden Nodes:", len(net.layers[1].nodes), ' + 1 bias node'
-print "Learn Rate:", net.get_learnrate()
-print "Epochs:", net.get_epochs()
+print("The selected model has the following characteristics")
+print("Activation Type:", net.layers[1].nodes[1].get_activation_type())
+print("Hidden Nodes:", len(net.layers[1].nodes), ' + 1 bias node')
+print("Learn Rate:", net.get_learnrate())
+print("Epochs:", net.get_epochs())
 
 test_positions = [item[0][0] * pop_len for item in net.get_test_data()]
 

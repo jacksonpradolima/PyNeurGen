@@ -132,7 +132,7 @@ class Genotype(object):
             raise ValueError("Invalid gene length")
         dec_geno = []
 
-        for i in range(0, self._gene_length * 8, 8):
+        for i in range(0, int(self._gene_length * 8), 8):
             item = self.binary_gene[i:i + 8]
             str_trans = base2tobase10(item)
             dec_geno.append(int(str_trans))
@@ -149,7 +149,7 @@ class Genotype(object):
         """
 
         bin_gene = []
-        for item in dec_gene:
+        for item in dec_gene:            
             bin_gene.append(base10tobase2(item, zfill=8))
         return ''.join(bin_gene)
 

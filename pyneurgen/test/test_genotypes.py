@@ -241,7 +241,7 @@ class TestGenotype(unittest.TestCase):
 
         #   new variable name
         self.g.set_bnf_variable("test_variable", "test_value")
-        self.assertEqual(True, self.g.local_bnf.has_key("test_variable"))
+        self.assertEqual(True, "test_variable" in self.g.local_bnf)
         self.assertEqual(["test_value"], self.g.local_bnf["test_variable"])
 
         #   new value
