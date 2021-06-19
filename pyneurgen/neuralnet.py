@@ -23,8 +23,8 @@ This module implements the components for an artficial neural network.
 """
 import math
 from random import random
-import ConfigParser
-//import configParser for Python3
+import configparser
+
 from pyneurgen.layers import Layer
 from pyneurgen.nodes import Node, CopyNode, BiasNode, Connection
 from pyneurgen.nodes import NODE_OUTPUT, NODE_HIDDEN, NODE_INPUT, NODE_COPY
@@ -411,9 +411,9 @@ class NeuralNet(object):
 
         """
 
-        for i in xrange(start_position, end_position):
+        for i in range(start_position, end_position):
             order = [[random(), i]
-                for i in xrange(start_position, end_position)]
+                for i in range(start_position, end_position)]
 
         order.sort()
         for item in order:
@@ -556,13 +556,12 @@ class NeuralNet(object):
                 if show_sample_interval > 0:
                     if count % show_sample_interval == 0:
                         #   Convert to logging at some point
-                        print ("epoch %s of %s, sample: %s errors: %s" % (
-                            epoch, self._epochs, count, summed_errors))
+                        print (f"epoch {epoch} of {self._epochs}, sample: {count} errors: {summed_errors}")
 
             mse = self.calc_mse(summed_errors, count)
             if show_epoch_results:
                 #   Convert this over to logging
-                print ("epoch: %s MSE: %s" % (epoch, mse))
+                print (f"epoch: {epoch} MSE: {mse}")
 
             self.accum_mse.append(mse)
 
@@ -610,8 +609,7 @@ class NeuralNet(object):
             if show_sample_interval > 0:
                 if count % show_sample_interval == 0:
                     #   Convert to logging at some point
-                    print "sample: %s errors: %s" % (
-                        count, summed_errors)
+                    print(f"sample: {count} errors: {summed_errors}")
 
         self.mse = self.calc_mse(summed_errors, count)
         return self.mse
@@ -849,7 +847,7 @@ class NeuralNet(object):
 
         """
 
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.readfp(open(filename))
 
         hidden_neurons = config.get('net', 'hidden_neurons').split(",")

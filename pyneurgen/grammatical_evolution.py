@@ -130,8 +130,8 @@ class GrammaticalEvolution(object):
 
         """
 
-        size = long(size)
-        if isinstance(size, long) and size > 0:
+        size = int(size)
+        if isinstance(size, int) and size > 0:
             self._population_size = size
             i = len(self.fitness_list)
             while i < size:
@@ -164,15 +164,15 @@ class GrammaticalEvolution(object):
         if max_gene_length is None:
             max_gene_length = start_gene_length
 
-        start_gene_length = long(start_gene_length)
-        max_gene_length = long(max_gene_length)
-        if not isinstance(start_gene_length, long):
+        start_gene_length = int(start_gene_length)
+        max_gene_length = int(max_gene_length)
+        if not isinstance(start_gene_length, int):
             raise ValueError("start_gene_length, %s, must be a long" % (
                                                     start_gene_length))
         if start_gene_length < 0:
             raise ValueError("start_gene_length, %s, must be above 0" % (
                                                     start_gene_length))
-        if not isinstance(max_gene_length, long):
+        if not isinstance(max_gene_length, int):
             raise ValueError("max_gene_length, %s, must be a long" % (
                                                     max_gene_length))
         if max_gene_length < 0:
@@ -329,8 +329,8 @@ class GrammaticalEvolution(object):
                     """ % (max_program_length)
         errmsg2 = """The maximum program length, %s must be greater than 0
                     """ % (max_program_length)
-        max_program_length = long(max_program_length)
-        if not isinstance(max_program_length, long):
+        max_program_length = int(max_program_length)
+        if not isinstance(max_program_length, int):
             raise ValueError(errmsg1)
         if max_program_length < 0:
             raise ValueError(errmsg2)
@@ -830,7 +830,7 @@ class GrammaticalEvolution(object):
         if length % 2 == 1:
             length -= 1
         if length >= 2:
-            for i in xrange(0, length, 2):
+            for i in range(0, length, 2):
                 parent1 = flist[i]
                 parent2 = flist[i + 1]
 
