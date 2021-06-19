@@ -24,7 +24,7 @@ This module implements the components for an artficial neural network.
 import math
 from random import random
 import ConfigParser
-
+//import configParser for Python3
 from pyneurgen.layers import Layer
 from pyneurgen.nodes import Node, CopyNode, BiasNode, Connection
 from pyneurgen.nodes import NODE_OUTPUT, NODE_HIDDEN, NODE_INPUT, NODE_COPY
