@@ -98,7 +98,7 @@ class RecurrentConfig(object):
             raise ValueError("neural_net must be of the NeuralNet class.")
         for snode in self.get_source_nodes(neural_net):
             prev_copy_node = None
-            for level in xrange(self.copy_levels):
+            for level in range(self.copy_levels):
                 copy_node = CopyNode()
                 if level == 0:
                     copy_node.set_source_node(snode)
